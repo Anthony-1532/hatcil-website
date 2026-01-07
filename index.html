@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
-         :root {
+
+        :root {
             --primary-color: #0A1931;
             --accent-color: #00A8E8;
             --secondary-color: #FFC947;
@@ -21,15 +20,15 @@
             --bg-light: #F8F9FA;
             --gradient: linear-gradient(135deg, #0A1931 0%, #00A8E8 100%);
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-dark);
             overflow-x: hidden;
         }
+
         /* Navigation */
-        
         nav {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -37,47 +36,51 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
         }
-        
+
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 0.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s ease;
         }
-        
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
         .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
         }
-        
+
         .nav-links a {
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 500;
             transition: color 0.3s;
         }
-        
+
         .nav-links a:hover {
             color: var(--accent-color);
         }
-        
+
         .mobile-menu {
             display: none;
             flex-direction: column;
             cursor: pointer;
         }
-        
+
         .mobile-menu span {
             width: 25px;
             height: 3px;
@@ -85,8 +88,8 @@
             margin: 3px 0;
             transition: 0.3s;
         }
+
         /* Hero Section */
-        
         .hero {
             margin-top: 80px;
             min-height: 90vh;
@@ -96,7 +99,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .hero::before {
             content: '';
             position: absolute;
@@ -105,16 +108,12 @@
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
             animation: float 20s linear infinite;
         }
-        
+
         @keyframes float {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
-        
+
         .hero-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -126,32 +125,32 @@
             position: relative;
             z-index: 1;
         }
-        
+
         .hero-text h1 {
             font-size: 3.5rem;
             color: white;
             margin-bottom: 1rem;
             line-height: 1.2;
         }
-        
+
         .hero-text .tagline {
             font-size: 1.5rem;
             color: var(--secondary-color);
             margin-bottom: 2rem;
         }
-        
+
         .hero-text p {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255,255,255,0.9);
             font-size: 1.1rem;
             margin-bottom: 2rem;
         }
-        
+
         .cta-buttons {
             display: flex;
             gap: 1rem;
             flex-wrap: wrap;
         }
-        
+
         .btn {
             padding: 1rem 2rem;
             text-decoration: none;
@@ -162,105 +161,133 @@
             border: none;
             font-size: 1rem;
         }
-        
+
         .btn-primary {
             background: var(--secondary-color);
             color: var(--primary-color);
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(255, 201, 71, 0.4);
         }
-        
+
         .btn-secondary {
             background: transparent;
             color: white;
             border: 2px solid white;
         }
-        
+
         .btn-secondary:hover {
             background: white;
             color: var(--primary-color);
         }
-        
+
         .hero-stats {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin-top: 3rem;
         }
-        
+
         .stat {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255,255,255,0.2);
         }
-        
+
         .stat-number {
             font-size: 2.5rem;
             font-weight: bold;
             color: var(--secondary-color);
         }
-        
+
         .stat-label {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255,255,255,0.8);
             margin-top: 0.5rem;
         }
+
+        /* Logo in Hero */
+        .hero-logo {
+            width: 100%;
+            height: 400px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 2rem;
+        }
+
+        .hero-logo img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        /* Logo in Footer */
+        .footer-logo img {
+            height: 60px;
+            width: auto;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1);
+        }
+
         /* Sections */
-        
         section {
             padding: 5rem 0;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-        
+
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
         }
-        
+
         .section-header h2 {
             font-size: 2.5rem;
             color: var(--primary-color);
             margin-bottom: 1rem;
         }
-        
+
         .section-header p {
             font-size: 1.2rem;
             color: #666;
             max-width: 600px;
             margin: 0 auto;
         }
+
         /* Services */
-        
         .services {
             background: var(--bg-light);
         }
-        
+
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
-        
+
         .service-card {
             background: white;
             padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
-        
+
         .service-card::before {
             content: '';
             position: absolute;
@@ -271,17 +298,17 @@
             background: var(--accent-color);
             transition: width 0.3s;
         }
-        
+
         .service-card:hover::before {
             width: 100%;
             opacity: 0.1;
         }
-        
+
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
-        
+
         .service-icon {
             width: 60px;
             height: 60px;
@@ -294,25 +321,25 @@
             font-size: 1.5rem;
             color: white;
         }
-        
+
         .service-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
             color: var(--primary-color);
         }
-        
+
         .service-features {
             list-style: none;
             margin-top: 1.5rem;
         }
-        
+
         .service-features li {
             padding: 0.5rem 0;
             color: #555;
             position: relative;
             padding-left: 1.5rem;
         }
-        
+
         .service-features li::before {
             content: '✓';
             position: absolute;
@@ -320,58 +347,58 @@
             color: var(--accent-color);
             font-weight: bold;
         }
+
         /* About */
-        
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
         }
-        
+
         .values-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
             margin-top: 2rem;
         }
-        
+
         .value-card {
             padding: 1.5rem;
             background: white;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             border-left: 4px solid var(--accent-color);
         }
-        
+
         .value-card h4 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
+
         /* Team */
-        
         .team {
             background: var(--bg-light);
         }
-        
+
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-        
+
         .team-card {
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             transition: transform 0.3s;
         }
-        
+
         .team-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .team-image {
             width: 100%;
             height: 250px;
@@ -382,49 +409,49 @@
             color: white;
             font-size: 4rem;
         }
-        
+
         .team-info {
             padding: 2rem;
         }
-        
+
         .team-info h3 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
-        
+
         .team-title {
             color: var(--accent-color);
             font-weight: 600;
             margin-bottom: 1rem;
         }
-        
+
         .team-bio {
             color: #666;
             line-height: 1.6;
         }
+
         /* Partners */
-        
         .partners-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
             align-items: center;
         }
-        
+
         .partner-card {
             background: white;
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             text-align: center;
             transition: all 0.3s;
         }
-        
+
         .partner-card:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
-        
+
         .partner-logo {
             width: 80px;
             height: 80px;
@@ -437,31 +464,31 @@
             font-weight: bold;
             color: var(--primary-color);
         }
+
         /* Contact */
-        
         .contact {
             background: var(--primary-color);
             color: white;
         }
-        
+
         .contact-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
         }
-        
+
         .contact-info h3 {
             margin-bottom: 1.5rem;
             color: var(--secondary-color);
         }
-        
+
         .contact-item {
             display: flex;
             align-items: center;
             margin-bottom: 1.5rem;
             gap: 1rem;
         }
-        
+
         .contact-icon {
             width: 40px;
             height: 40px;
@@ -471,23 +498,23 @@
             align-items: center;
             justify-content: center;
         }
-        
+
         .contact-form {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             padding: 2rem;
             border-radius: 20px;
             backdrop-filter: blur(10px);
         }
-        
+
         .form-group {
             margin-bottom: 1.5rem;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
         }
-        
+
         .form-group input,
         .form-group textarea {
             width: 100%;
@@ -496,28 +523,21 @@
             border-radius: 10px;
             font-size: 1rem;
         }
-        
+
         .form-group textarea {
             resize: vertical;
             min-height: 120px;
         }
+
         /* Footer */
-        
         footer {
             background: #051423;
             color: white;
             text-align: center;
             padding: 2rem;
         }
-        
-        .footer-logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            color: var(--secondary-color);
-        }
+
         /* Mobile Responsive */
-        
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -528,53 +548,65 @@
                 background: white;
                 flex-direction: column;
                 padding: 1rem;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             }
+
             .nav-links.active {
                 display: flex;
             }
+
             .mobile-menu {
                 display: flex;
             }
+
             .hero-content,
             .about-content,
             .contact-content {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
+
             .hero-text h1 {
                 font-size: 2.5rem;
             }
+
             .hero-stats {
                 grid-template-columns: 1fr;
             }
+
             .values-grid {
                 grid-template-columns: 1fr;
             }
+
             .cta-buttons {
                 justify-content: center;
             }
+
+            .logo img {
+                height: 40px;
+            }
         }
+
         /* Animations */
-        
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s;
         }
-        
+
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
     </style>
 </head>
-
 <body>
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <div class="logo">HATCIL</div>
+            <div class="logo">
+                <img src="image.png" alt="HATCIL Logo">
+            </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -622,8 +654,8 @@
                 </div>
             </div>
             <div class="hero-visual">
-                <div style="width: 100%; height: 400px; background: rgba(255,255,255,0.1); border-radius: 20px; backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; border: 1px solid rgba(255,255,255,0.2);">
-                    [Innovation Visual]
+                <div class="hero-logo">
+                    <img src="image.png" alt="HATCIL Corporate Logo">
                 </div>
             </div>
         </div>
@@ -741,8 +773,7 @@
                     <div class="team-info">
                         <h3>Professor Yakubu Ochefu</h3>
                         <div class="team-title">Lead Consultant</div>
-                        <p class="team-bio">Four decades of academic leadership expertise. Former Vice-Chancellor of Kwararafa University and Secretary-General of the Committee of Vice-Chancellors of Nigerian Universities. International consulting experience with World Bank,
-                            UNDP, and university transformation projects across Nigeria, Liberia, Ghana, and Uganda.</p>
+                        <p class="team-bio">Four decades of academic leadership expertise. Former Vice-Chancellor of Kwararafa University and Secretary-General of the Committee of Vice-Chancellors of Nigerian Universities. International consulting experience with World Bank, UNDP, and university transformation projects across Nigeria, Liberia, Ghana, and Uganda.</p>
                     </div>
                 </div>
                 <div class="team-card">
@@ -750,8 +781,7 @@
                     <div class="team-info">
                         <h3>Gloria Kumawuese Kurga</h3>
                         <div class="team-title">Principal Consultant</div>
-                        <p class="team-bio">Results-oriented professional specializing in program coordination and strategic event management. Master's in Leadership and Organization from University of Malmo. Coordinated high-impact projects including AI Hub gatherings of
-                            150+ attendees. Founder of LuSam Innovative Services.</p>
+                        <p class="team-bio">Results-oriented professional specializing in program coordination and strategic event management. Master's in Leadership and Organization from University of Malmo. Coordinated high-impact projects including AI Hub gatherings of 150+ attendees. Founder of LuSam Innovative Services.</p>
                     </div>
                 </div>
                 <div class="team-card">
@@ -759,8 +789,7 @@
                     <div class="team-info">
                         <h3>Amara Ochefu</h3>
                         <div class="team-title">Principal Consultant</div>
-                        <p class="team-bio">Next-generation global education consultant with BA (Hons) Politics from Loughborough University. International experience as Assistant Language Teacher in Tokyo and former Program Associate at Malala Fund. Multilingual in English,
-                            Spanish, and Japanese with expertise in curriculum innovation and policy development.</p>
+                        <p class="team-bio">Next-generation global education consultant with BA (Hons) Politics from Loughborough University. International experience as Assistant Language Teacher in Tokyo and former Program Associate at Malala Fund. Multilingual in English, Spanish, and Japanese with expertise in curriculum innovation and policy development.</p>
                     </div>
                 </div>
                 <div class="team-card">
@@ -768,8 +797,7 @@
                     <div class="team-info">
                         <h3>Dumebi Ikenye-Ochefu</h3>
                         <div class="team-title">Senior Consultant</div>
-                        <p class="team-bio">Strategic operations specialist with expertise in data systems management and compliance auditing. M.Sc. in Defence and Strategic Studies. Transforms complex organizational challenges into streamlined solutions with experience
-                            in oil and gas compliance and national conference coordination.</p>
+                        <p class="team-bio">Strategic operations specialist with expertise in data systems management and compliance auditing. M.Sc. in Defence and Strategic Studies. Transforms complex organizational challenges into streamlined solutions with experience in oil and gas compliance and national conference coordination.</p>
                     </div>
                 </div>
             </div>
@@ -841,25 +869,29 @@
                     <div class="contact-item">
                         <div class="contact-icon">📍</div>
                         <div>
-                            <strong>Address</strong><br> 24 Ubiaja Crescent, Garki, Abuja 900110, FCT, Nigeria
+                            <strong>Address</strong><br>
+                            24 Ubiaja Crescent, Garki, Abuja 900110, FCT, Nigeria
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">📧</div>
                         <div>
-                            <strong>Email</strong><br> hattcil@outlook.com
+                            <strong>Email</strong><br>
+                            hattcil@outlook.com
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">📞</div>
                         <div>
-                            <strong>Phone</strong><br> +234 915 540 9662
+                            <strong>Phone</strong><br>
+                            +234 915 540 9662
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">🌐</div>
                         <div>
-                            <strong>Website</strong><br> hatcil.com
+                            <strong>Website</strong><br>
+                            hatcil.com
                         </div>
                     </div>
                 </div>
@@ -890,7 +922,9 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-logo">HATCIL</div>
+        <div class="footer-logo">
+            <img src="image.png" alt="HATCIL Logo">
+        </div>
         <p>&copy; 2024 Hanzumana-Asheazi-Tebe-Tebe Consulting and Investments Limited. All rights reserved.</p>
         <p>Transforming Institutions Through Innovation Excellence</p>
     </footer>
@@ -906,7 +940,7 @@
 
         // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
@@ -929,7 +963,7 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-
+                    
                     // Animate counters
                     if (entry.target.querySelector('.hero-stats')) {
                         animateCounters();
@@ -949,7 +983,7 @@
                 const target = +counter.getAttribute('data-target');
                 const increment = target / 100;
                 let current = 0;
-
+                
                 const updateCounter = () => {
                     if (current < target) {
                         current += increment;
@@ -959,7 +993,7 @@
                         counter.textContent = target + (counter.parentElement.textContent.includes('%') ? '' : '+');
                     }
                 };
-
+                
                 updateCounter();
             });
         }
@@ -975,5 +1009,4 @@
         document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} Hanzumana-Asheazi-Tebe-Tebe Consulting and Investments Limited. All rights reserved.`;
     </script>
 </body>
-
 </html>
