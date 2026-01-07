@@ -49,9 +49,8 @@
         }
 
         .logo img {
-            height: 48px;
+            height: 50px;
             width: auto;
-            object-fit: contain;
             transition: transform 0.3s ease;
         }
 
@@ -101,6 +100,20 @@
             overflow: hidden;
         }
 
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
         .hero-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -117,6 +130,7 @@
             font-size: 3.5rem;
             color: white;
             margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
         .hero-text .tagline {
@@ -139,10 +153,13 @@
 
         .btn {
             padding: 1rem 2rem;
+            text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
-            text-decoration: none;
-            transition: 0.3s;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
         }
 
         .btn-primary {
@@ -150,12 +167,52 @@
             color: var(--primary-color);
         }
 
-        .btn-secondary {
-            border: 2px solid white;
-            color: white;
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 201, 71, 0.4);
         }
 
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.8);
+            margin-top: 0.5rem;
+        }
+
+        /* Logo in Hero */
         .hero-logo {
+            width: 100%;
             height: 400px;
             background: rgba(255,255,255,0.1);
             border-radius: 20px;
@@ -163,6 +220,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 2rem;
         }
 
         .hero-logo img {
@@ -171,6 +230,306 @@
             object-fit: contain;
         }
 
+        /* Logo in Footer */
+        .footer-logo img {
+            height: 60px;
+            width: auto;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Services */
+        .services {
+            background: var(--bg-light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--accent-color);
+            transition: width 0.3s;
+        }
+
+        .service-card:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .value-card {
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .value-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Team */
+        .team {
+            background: var(--bg-light);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-image {
+            width: 100%;
+            height: 250px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        .team-info {
+            padding: 2rem;
+        }
+
+        .team-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-title {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .team-bio {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Partners */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .partner-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .partner-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .partner-logo {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
         footer {
             background: #051423;
             color: white;
@@ -178,19 +537,8 @@
             padding: 2rem;
         }
 
-        .footer-logo img {
-            height: 60px;
-            width: auto;
-            filter: brightness(0) invert(1);
-            margin-bottom: 1rem;
-        }
-
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
             .nav-links {
                 display: none;
                 position: absolute;
@@ -200,6 +548,7 @@
                 background: white;
                 flex-direction: column;
                 padding: 1rem;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             }
 
             .nav-links.active {
@@ -209,69 +558,455 @@
             .mobile-menu {
                 display: flex;
             }
+
+            .hero-content,
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-
 <body>
-
-<!-- Navigation -->
-<nav>
-    <div class="nav-container">
-        <a href="#home" class="logo">
-            <img src="hatcil-logo.png" alt="HATCIL Logo">
-        </a>
-
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#team">Leadership</a></li>
-            <li><a href="#partners">Partners</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-
-        <div class="mobile-menu" id="mobileMenu">
-            <span></span><span></span><span></span>
-        </div>
-    </div>
-</nav>
-
-<!-- Hero -->
-<section id="home" class="hero">
-    <div class="hero-content">
-        <div class="hero-text">
-            <h1>Transforming Institutions Through Innovation Excellence</h1>
-            <p class="tagline">Premier Industry 4.0 Transformation Consultancy for Africa</p>
-            <p>Bridging traditional systems with future-ready innovation.</p>
-            <div class="cta-buttons">
-                <a href="#contact" class="btn btn-primary">Partner With Us</a>
-                <a href="#services" class="btn btn-secondary">Our Services</a>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="image.png" alt="HATCIL Logo">
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#team">Leadership</a></li>
+                <li><a href="#partners">Partners</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
+    </nav>
 
-        <div class="hero-logo">
-            <img src="hatcil-logo.png" alt="HATCIL Corporate Logo">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content fade-in">
+            <div class="hero-text">
+                <h1>Transforming Institutions Through Innovation Excellence</h1>
+                <p class="tagline">Premier Industry 4.0 Transformation Consultancy for Africa</p>
+                <p>Bridging the gap between traditional operations and future-ready environments, integrating digital innovation, research excellence, and sustainable practices across educational institutions.</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Partner With Us</a>
+                    <a href="#services" class="btn btn-secondary">Our Services</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number" data-target="10">0</div>
+                        <div class="stat-label">Years of Impact</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" data-target="10">0</div>
+                        <div class="stat-label">Leading Institutions</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" data-target="85">0</div>
+                        <div class="stat-label">% Engagement Improvement</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" data-target="60">0</div>
+                        <div class="stat-label">% Cost Reduction</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-logo">
+                    <img src="image.png" alt="HATCIL Corporate Logo">
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Footer -->
-<footer>
-    <div class="footer-logo">
-        <img src="hatcil-logo.png" alt="HATCIL Logo">
-    </div>
-    <p>&copy; 2024 Hanzumana-Asheazi-Tebe-Tebe Consulting and Investments Limited</p>
-</footer>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>About HATCIL</h2>
+                <p>Co-creating thriving educational ecosystems where innovation, entrepreneurship, and sustainable development converge across Africa.</p>
+            </div>
+            <div class="about-content fade-in">
+                <div>
+                    <h3>Vision & Mission</h3>
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <h4>Vision</h4>
+                            <p>To co-create thriving educational and institutional ecosystems across Africa where innovation, entrepreneurship, and sustainable development converge.</p>
+                        </div>
+                        <div class="value-card">
+                            <h4>Mission</h4>
+                            <p>Design and implement comprehensive transformation solutions that convert institutions into integrated hubs of learning, research, and innovation.</p>
+                        </div>
+                        <div class="value-card">
+                            <h4>Excellence & Innovation</h4>
+                            <p>Pursuing highest standards while embracing emerging technologies and creative approaches.</p>
+                        </div>
+                        <div class="value-card">
+                            <h4>Sustainability & Impact</h4>
+                            <p>Integrating environmentally conscious, economically viable solutions for lasting outcomes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>The HATCIL Advantage</h3>
+                    <ul class="service-features">
+                        <li>Proven Track Record: 10+ successful transformation projects across West Africa</li>
+                        <li>Expert Multidisciplinary Team: Education technology specialists with deep African context knowledge</li>
+                        <li>Strategic Partnerships: Established relationships with technology providers and funding organizations</li>
+                        <li>End-to-End Support: From conception through implementation with ongoing optimization</li>
+                        <li>Flexible Investment Models: Phased funding, revenue-sharing, grant assistance, and co-investment options</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script>
-    const mobileMenu = document.getElementById('mobileMenu');
-    const navLinks = document.getElementById('navLinks');
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Service Portfolio</h2>
+                <p>Our integrated approach delivers transformation across four strategic pillars</p>
+            </div>
+            <div class="services-grid fade-in">
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Digital Transformation & Emerging Technologies</h3>
+                    <p>Deploy advanced digital infrastructure that redefines institutional operations and value delivery.</p>
+                    <ul class="service-features">
+                        <li>Metaverse & Virtual Campus Development</li>
+                        <li>Blockchain Integration for credentials</li>
+                        <li>Extended Reality (XR) Laboratories</li>
+                        <li>AI-driven learning platforms</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔬</div>
+                    <h3>Research, Innovation & Advanced Manufacturing</h3>
+                    <p>Establish research ecosystems that bridge academia and industry.</p>
+                    <ul class="service-features">
+                        <li>Advanced Manufacturing Hubs (3D printing)</li>
+                        <li>Strategic Industry Partnerships</li>
+                        <li>Innovation Ecosystem Development</li>
+                        <li>Startup incubation & VC access</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🌱</div>
+                    <h3>Sustainable Agriculture & Food Security</h3>
+                    <p>Implement precision agriculture and sustainable food production systems.</p>
+                    <ul class="service-features">
+                        <li>Hydroponic & Aeroponic systems (90% water savings)</li>
+                        <li>Technology-Driven Farm Security</li>
+                        <li>Micro-Livestock & Urban Farming</li>
+                        <li>AI-driven growth analytics</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Sustainability & Future Skills</h3>
+                    <p>Create environmentally responsible institutions while preparing future workforces.</p>
+                    <ul class="service-features">
+                        <li>Renewable Energy Solutions (Solar & Micro-grids)</li>
+                        <li>Waste-to-Value Programs (Biogas, Circular economy)</li>
+                        <li>Future Skills Academy (AI, Data Science, Cybersecurity)</li>
+                        <li>Autonomous AI Agents development</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    mobileMenu.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-</script>
+    <!-- Leadership Team -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Leadership Team</h2>
+                <p>Expert multidisciplinary team with deep understanding of African contexts and global best practices</p>
+            </div>
+            <div class="team-grid fade-in">
+                <div class="team-card">
+                    <div class="team-image">👨‍💼</div>
+                    <div class="team-info">
+                        <h3>Professor Yakubu Ochefu</h3>
+                        <div class="team-title">Lead Consultant</div>
+                        <p class="team-bio">Four decades of academic leadership expertise. Former Vice-Chancellor of Kwararafa University and Secretary-General of the Committee of Vice-Chancellors of Nigerian Universities. International consulting experience with World Bank, UNDP, and university transformation projects across Nigeria, Liberia, Ghana, and Uganda.</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-image">👩‍💼</div>
+                    <div class="team-info">
+                        <h3>Gloria Kumawuese Kurga</h3>
+                        <div class="team-title">Principal Consultant</div>
+                        <p class="team-bio">Results-oriented professional specializing in program coordination and strategic event management. Master's in Leadership and Organization from University of Malmo. Coordinated high-impact projects including AI Hub gatherings of 150+ attendees. Founder of LuSam Innovative Services.</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-image">👩‍🎓</div>
+                    <div class="team-info">
+                        <h3>Amara Ochefu</h3>
+                        <div class="team-title">Principal Consultant</div>
+                        <p class="team-bio">Next-generation global education consultant with BA (Hons) Politics from Loughborough University. International experience as Assistant Language Teacher in Tokyo and former Program Associate at Malala Fund. Multilingual in English, Spanish, and Japanese with expertise in curriculum innovation and policy development.</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-image">👩‍💻</div>
+                    <div class="team-info">
+                        <h3>Dumebi Ikenye-Ochefu</h3>
+                        <div class="team-title">Senior Consultant</div>
+                        <p class="team-bio">Strategic operations specialist with expertise in data systems management and compliance auditing. M.Sc. in Defence and Strategic Studies. Transforms complex organizational challenges into streamlined solutions with experience in oil and gas compliance and national conference coordination.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Partners -->
+    <section id="partners" class="partners">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2>Strategic Partner Network</h2>
+                <p>Established relationships with technology providers, funding organizations, and government bodies</p>
+            </div>
+            <div class="partners-grid fade-in">
+                <div class="partner-card">
+                    <div class="partner-logo">OYE</div>
+                    <h4>Oye-Dynamix</h4>
+                    <p>Organizational Transformation & Executive Recruitment</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">HDS</div>
+                    <h4>Heavensgate Development Services</h4>
+                    <p>Architectural Design & Engineering</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">APL</div>
+                    <h4>Aboki Properties Limited</h4>
+                    <p>Real Estate & Infrastructure Development</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">AP</div>
+                    <h4>Aboki Publishers</h4>
+                    <p>Educational Publishing & Content Development</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">BS</div>
+                    <h4>Bold Scholar</h4>
+                    <p>Digital Repository & Academic Technology</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">DSI</div>
+                    <h4>Development Support Initiative</h4>
+                    <p>Rural Development & Community Engagement</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">MES</div>
+                    <h4>Mammy Educational Services</h4>
+                    <p>Pre-Higher School Development</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-logo">RPI</div>
+                    <h4>Raadaa Partners International</h4>
+                    <p>Technology, Research & Data Integration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header fade-in">
+                <h2 style="color: white;">Partner With Us</h2>
+                <p style="color: rgba(255,255,255,0.8);">Let's transform your institution together</p>
+            </div>
+            <div class="contact-content fade-in">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <strong>Address</strong><br>
+                            24 Ubiaja Crescent, Garki, Abuja 900110, FCT, Nigeria
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <strong>Email</strong><br>
+                            hattcil@outlook.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <strong>Phone</strong><br>
+                            +234 915 540 9662
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🌐</div>
+                        <div>
+                            <strong>Website</strong><br>
+                            hatcil.com
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="institution">Institution/Organization</label>
+                            <input type="text" id="institution" name="institution">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Project Details</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your transformation goals..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Start Your Transformation Journey</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">
+            <img src="image.png" alt="HATCIL Logo">
+        </div>
+        <p>&copy; 2024 Hanzumana-Asheazi-Tebe-Tebe Consulting and Investments Limited. All rights reserved.</p>
+        <p>Transforming Institutions Through Innovation Excellence</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Animate on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate counters
+                    if (entry.target.querySelector('.hero-stats')) {
+                        animateCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const increment = target / 100;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current);
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.textContent = target + (counter.parentElement.textContent.includes('%') ? '' : '+');
+                    }
+                };
+                
+                updateCounter();
+            });
+        }
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your interest! We will contact you within 24 hours to discuss your transformation goals.');
+            e.target.reset();
+        });
+
+        // Dynamic Year in Footer
+        document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} Hanzumana-Asheazi-Tebe-Tebe Consulting and Investments Limited. All rights reserved.`;
+    </script>
 </body>
 </html>
