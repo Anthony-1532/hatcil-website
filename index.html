@@ -4,28 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HATCIL - Transforming Institutions Through Innovation Excellence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
             --primary-color: #0A1931;
             --accent-color: #00A8E8;
             --secondary-color: #FFC947;
-            --text-dark: #1A1A1A;
             --text-light: #F5F5F5;
-            --bg-light: #F8F9FA;
-            --gradient: linear-gradient(135deg, #0A1931 0%, #00A8E8 100%);
+            --text-dark: #1F2937;
+            --gradient: linear-gradient(135deg, #0A1931 0%, #001f3f 100%);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             overflow-x: hidden;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6, .nav-links a, .btn {
+            font-family: 'Montserrat', sans-serif;
         }
 
         /* Navigation */
@@ -61,7 +69,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2rem; 
         }
 
         .nav-links a {
@@ -71,7 +79,8 @@
             transition: color 0.3s;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: var(--accent-color);
         }
 
@@ -92,8 +101,10 @@
         /* Hero Section */
         .hero {
             margin-top: 80px;
-            min-height: 90vh;
-            background: var(--gradient);
+            min-height: 70vh;
+            background: linear-gradient(135deg, rgba(10, 25, 49, 0.9) 0%, rgba(3, 65, 137, 0.8) 100%), url('https://cdn.stocksnap.io/img-thumbs/960w/globe-global_HH2ZMUI6PO.jpg');
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             position: relative;
@@ -117,39 +128,43 @@
         .hero-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            padding: 0 4rem;
+            display: flex;
             align-items: center;
             position: relative;
             z-index: 1;
+            min-height: 400px;
+        }
+
+        .hero-text {
+            max-width: 800px;
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             color: white;
-            margin-bottom: 1rem;
-            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+            word-wrap: break-word;
+            hyphens: auto;
+            font-weight: 700;
         }
 
         .hero-text .tagline {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--secondary-color);
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
         }
 
         .hero-text p {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.85);
             font-size: 1.1rem;
             margin-bottom: 2rem;
+            line-height: 1.6;
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
+
 
         .btn {
             padding: 1rem 2rem;
@@ -185,8 +200,8 @@
 
         .hero-stats {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
             margin-top: 3rem;
         }
 
@@ -213,40 +228,40 @@
         /* Logo in Hero */
         .hero-logo {
             width: 100%;
-            height: 400px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            height: 320px;
+            background: transparent;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 2rem;
+            padding: 0;
+            overflow: hidden;
         }
 
         .hero-logo img {
-            max-width: 80%;
-            max-height: 80%;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
             object-fit: contain;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
         }
 
         /* Logo in Footer */
+        .footer-logo {
+            text-align: center;
+        }
         .footer-logo img {
             height: 60px;
             width: auto;
-            margin-bottom: 1rem;
-            filter: brightness(0) invert(1);
+            margin-bottom: 1.5rem;
         }
 
         /* Sections */
-        section {
-            padding: 5rem 0;
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem;
         }
 
         .section-header {
@@ -267,16 +282,9 @@
             margin: 0 auto;
         }
 
-        /* Services */
-        .services {
-            background: var(--bg-light);
-        }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
+
+
 
         .service-card {
             background: white;
@@ -376,16 +384,9 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Team */
-        .team {
-            background: var(--bg-light);
-        }
 
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+
+
 
         .team-card {
             background: white;
@@ -401,13 +402,23 @@
 
         .team-image {
             width: 100%;
-            height: 250px;
-            background: var(--gradient);
+            height: 300px;
+            background: #f8f9fa;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 4rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.3s ease;
         }
 
         .team-info {
@@ -431,16 +442,11 @@
         }
 
         /* Partners */
-        .partners-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            align-items: center;
-        }
+
 
         .partner-card {
             background: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             text-align: center;
@@ -465,17 +471,9 @@
             color: var(--primary-color);
         }
 
-        /* Contact */
-        .contact {
-            background: var(--primary-color);
-            color: white;
-        }
 
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
+
+
 
         .contact-info h3 {
             margin-bottom: 1.5rem;
@@ -504,6 +502,7 @@
             padding: 2rem;
             border-radius: 20px;
             backdrop-filter: blur(10px);
+            margin: 0;
         }
 
         .form-group {
@@ -535,6 +534,10 @@
             color: white;
             text-align: center;
             padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         /* Mobile Responsive */
@@ -549,6 +552,7 @@
                 flex-direction: column;
                 padding: 1rem;
                 box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                z-index: 999;
             }
 
             .nav-links.active {
@@ -559,44 +563,75 @@
                 display: flex;
             }
 
-            .hero-content,
             .about-content,
             .contact-content {
                 grid-template-columns: 1fr;
                 text-align: center;
+                gap: 2rem;
             }
 
             .hero-text h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                line-height: 1.1;
             }
 
-            .hero-stats {
-                grid-template-columns: 1fr;
+            .hero-logo {
+                height: 200px;
             }
+
+        .hero-stats {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
 
             .values-grid {
                 grid-template-columns: 1fr;
             }
 
-            .cta-buttons {
-                justify-content: center;
-            }
-
             .logo img {
                 height: 40px;
+            }
+
+            .team-image {
+                height: 250px;
             }
         }
 
         /* Animations */
         .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s;
+            opacity: 1;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        /* Section snap points */
+        html {
+            scroll-behavior: auto;
+        }
+
+        /* Remove existing hover transitions to prevent conflicts with GSAP */
+        .service-card,
+        .team-card,
+        .partner-card {
+            transition: none;
+        }
+
+        .logo img {
+            transition: none;
+        }
+
+        /* Active nav link styling */
+        .nav-links a.active {
+            position: relative;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-color);
         }
     </style>
 </head>
@@ -605,7 +640,7 @@
     <nav>
         <div class="nav-container">
             <div class="logo">
-                <img src="image.png" alt="HATCIL Logo">
+                <img src="asset/logo.jpg"></img>
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
@@ -630,7 +665,7 @@
                 <h1>Transforming Institutions Through Innovation Excellence</h1>
                 <p class="tagline">Premier Industry 4.0 Transformation Consultancy for Africa</p>
                 <p>Bridging the gap between traditional operations and future-ready environments, integrating digital innovation, research excellence, and sustainable practices across educational institutions.</p>
-                <div class="cta-buttons">
+                <div class="flex gap-4 flex-wrap">
                     <a href="#contact" class="btn btn-primary">Partner With Us</a>
                     <a href="#services" class="btn btn-secondary">Our Services</a>
                 </div>
@@ -653,16 +688,11 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="hero-logo">
-                    <img src="image.png" alt="HATCIL Corporate Logo">
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
+    <section id="about" class="about py-20">
         <div class="container">
             <div class="section-header fade-in">
                 <h2>About HATCIL</h2>
@@ -705,15 +735,17 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="services">
+    <section id="services" class="services bg-gray-50 py-20">
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Service Portfolio</h2>
                 <p>Our integrated approach delivers transformation across four strategic pillars</p>
             </div>
-            <div class="services-grid fade-in">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 fade-in">
                 <div class="service-card">
-                    <div class="service-icon">🚀</div>
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-9.56 1.59 1.59 0 0 1 2.15-2.15 22 22 0 0 1 9.6 2 1.59 1.59 0 0 1 2.15 2.15 22 22 0 0 1-9.56 2z"/><path d="m5 14 1.76 1.76a2 2 0 0 0 2.83 2.83L11.41 16"/></svg>
+                    </div>
                     <h3>Digital Transformation & Emerging Technologies</h3>
                     <p>Deploy advanced digital infrastructure that redefines institutional operations and value delivery.</p>
                     <ul class="service-features">
@@ -724,7 +756,9 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🔬</div>
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1 2-2V6a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2Z"/><path d="M12 6h5a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-2"/></svg>
+                    </div>
                     <h3>Research, Innovation & Advanced Manufacturing</h3>
                     <p>Establish research ecosystems that bridge academia and industry.</p>
                     <ul class="service-features">
@@ -735,7 +769,9 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">🌱</div>
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M5 22H2v-5a10 10 0 0 1 10-10"/><path d="M22 22h-3v-5a10 10 0 0 0-10-10"/></svg>
+                    </div>
                     <h3>Sustainable Agriculture & Food Security</h3>
                     <p>Implement precision agriculture and sustainable food production systems.</p>
                     <ul class="service-features">
@@ -746,7 +782,9 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">⚡</div>
+                    <div class="service-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
                     <h3>Sustainability & Future Skills</h3>
                     <p>Create environmentally responsible institutions while preparing future workforces.</p>
                     <ul class="service-features">
@@ -761,15 +799,17 @@
     </section>
 
     <!-- Leadership Team -->
-    <section id="team" class="team">
+    <section id="team" class="team bg-gray-50 py-20">
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Leadership Team</h2>
                 <p>Expert multidisciplinary team with deep understanding of African contexts and global best practices</p>
             </div>
-            <div class="team-grid fade-in">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 fade-in">
                 <div class="team-card">
-                    <div class="team-image">👨‍💼</div>
+                    <div class="team-image">
+                        <img src="asset/yakubu.png" alt="Professor Yakubu Ochefu">
+                    </div>
                     <div class="team-info">
                         <h3>Professor Yakubu Ochefu</h3>
                         <div class="team-title">Lead Consultant</div>
@@ -777,7 +817,9 @@
                     </div>
                 </div>
                 <div class="team-card">
-                    <div class="team-image">👩‍💼</div>
+                    <div class="team-image">
+                        <img src="asset/persn.jpg" alt="Gloria Kumawuese Kurga">
+                    </div>
                     <div class="team-info">
                         <h3>Gloria Kumawuese Kurga</h3>
                         <div class="team-title">Principal Consultant</div>
@@ -785,7 +827,9 @@
                     </div>
                 </div>
                 <div class="team-card">
-                    <div class="team-image">👩‍🎓</div>
+                    <div class="team-image">
+                        <img src="asset/amara.jpg" alt="Amara Ochefu">
+                    </div>
                     <div class="team-info">
                         <h3>Amara Ochefu</h3>
                         <div class="team-title">Principal Consultant</div>
@@ -793,7 +837,9 @@
                     </div>
                 </div>
                 <div class="team-card">
-                    <div class="team-image">👩‍💻</div>
+                    <div class="team-image">
+                        <img src="asset/dumebi.jpg" alt="Dumebi Ikenye-Ochefu">
+                    </div>
                     <div class="team-info">
                         <h3>Dumebi Ikenye-Ochefu</h3>
                         <div class="team-title">Senior Consultant</div>
@@ -805,13 +851,13 @@
     </section>
 
     <!-- Partners -->
-    <section id="partners" class="partners">
+    <section id="partners" class="partners py-20">
         <div class="container">
             <div class="section-header fade-in">
                 <h2>Strategic Partner Network</h2>
                 <p>Established relationships with technology providers, funding organizations, and government bodies</p>
             </div>
-            <div class="partners-grid fade-in">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 fade-in">
                 <div class="partner-card">
                     <div class="partner-logo">OYE</div>
                     <h4>Oye-Dynamix</h4>
@@ -857,38 +903,46 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact py-20">
         <div class="container">
             <div class="section-header fade-in">
-                <h2 style="color: white;">Partner With Us</h2>
-                <p style="color: rgba(255,255,255,0.8);">Let's transform your institution together</p>
+                <h2 class="text-white">Partner With Us</h2>
+                <p class="text-white/80">Let's transform your institution together</p>
             </div>
-            <div class="contact-content fade-in">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 fade-in">
                 <div class="contact-info">
                     <h3>Get In Touch</h3>
                     <div class="contact-item">
-                        <div class="contact-icon">📍</div>
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
                         <div>
                             <strong>Address</strong><br>
                             24 Ubiaja Crescent, Garki, Abuja 900110, FCT, Nigeria
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">📧</div>
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </div>
                         <div>
                             <strong>Email</strong><br>
                             hattcil@outlook.com
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">📞</div>
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
                         <div>
                             <strong>Phone</strong><br>
                             +234 915 540 9662
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">🌐</div>
+                        <div class="contact-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        </div>
                         <div>
                             <strong>Website</strong><br>
                             hatcil.com
@@ -922,91 +976,523 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-logo">
-            <img src="image.png" alt="HATCIL Logo">
-        </div>
-        <p>&copy; 2024 Hanzumana-Asheazi-Tebe-Tebe Consulting and Investments Limited. All rights reserved.</p>
+    <div class="footer-logo">
+        <img src="asset/logo.jpg">
+    </div>
+        <p>&copy; 2026 Hanzumana-Asheazi-Tebe-Tebe Consulting and Investments Limited. All rights reserved.</p>
         <p>Transforming Institutions Through Innovation Excellence</p>
     </footer>
 
+
     <script>
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
+
         // Mobile Menu Toggle
         const mobileMenu = document.getElementById('mobileMenu');
         const navLinks = document.getElementById('navLinks');
 
+        // Animate mobile menu with GSAP
         mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+            if (navLinks.classList.contains('active')) {
+                gsap.to(navLinks, {
+                    duration: 0.3,
+                    opacity: 0,
+                    y: -20,
+                    onComplete: () => {
+                        navLinks.classList.remove('active');
+                        navLinks.style.display = 'none';
+                    }
+                });
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.classList.add('active');
+                gsap.fromTo(navLinks, 
+                    { opacity: 0, y: -20 },
+                    { duration: 0.3, opacity: 1, y: 0 }
+                );
+            }
         });
 
-        // Smooth Scrolling
+        // Smooth Scrolling with GSAP
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    isScrolling = true;
+                    gsap.to(window, {
+                        duration: 1,
+                        scrollTo: { y: target, offsetY: 80 },
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            setTimeout(() => { isScrolling = false; }, 100);
+                        }
                     });
                     navLinks.classList.remove('active');
                 }
             });
         });
 
-        // Animate on Scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    
-                    // Animate counters
-                    if (entry.target.querySelector('.hero-stats')) {
-                        animateCounters();
-                    }
-                }
+        // GSAP Animations on Load
+        window.addEventListener('load', () => {
+            // Animate hero content with staggered left-to-right entrance
+            gsap.from('.hero-text h1', {
+                duration: 1.2,
+                opacity: 0,
+                x: -80,
+                ease: "power3.out"
             });
-        }, observerOptions);
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
+            gsap.from('.hero-text .tagline', {
+                duration: 1,
+                opacity: 0,
+                x: -60,
+                delay: 0.2,
+                ease: "power3.out"
+            });
+
+            gsap.from('.hero-text p', {
+                duration: 1,
+                opacity: 0,
+                x: -40,
+                delay: 0.4,
+                ease: "power3.out"
+            });
+
+            gsap.from('.flex.gap-4', {
+                duration: 1,
+                opacity: 0,
+                y: 30,
+                delay: 0.6,
+                ease: "power3.out"
+            });
+
+            // Animate stats from bottom with stagger
+            gsap.from('.stat', {
+                duration: 0.8,
+                opacity: 0,
+                y: 40,
+                stagger: 0.1,
+                delay: 0.8,
+                ease: "back.out(1.2)"
+            });
+
+            // Animate stats with counter
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach((counter, index) => {
+                const target = +counter.getAttribute('data-target');
+                
+                gsap.fromTo(counter, 
+                    { textContent: 0 },
+                    {
+                        textContent: target,
+                        duration: 2,
+                        delay: 1.2 + (index * 0.2),
+                        ease: "power2.out",
+                        snap: { textContent: 1 },
+                        onUpdate: function() {
+                            counter.textContent = Math.ceil(counter.textContent) + (counter.parentElement.textContent.includes('%') ? '' : '+');
+                        }
+                    }
+                );
+            });
+
+            // Animate navigation
+            gsap.from('.nav-container', {
+                duration: 1,
+                opacity: 0,
+                y: -20,
+                ease: "power3.out"
+            });
+
+            // Hero background animation
+            gsap.to('.hero::before', {
+                rotation: 360,
+                duration: 20,
+                repeat: -1,
+                ease: "none"
+            });
         });
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number');
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const increment = target / 100;
-                let current = 0;
-                
-                const updateCounter = () => {
-                    if (current < target) {
-                        current += increment;
-                        counter.textContent = Math.ceil(current);
-                        setTimeout(updateCounter, 20);
-                    } else {
-                        counter.textContent = target + (counter.parentElement.textContent.includes('%') ? '' : '+');
-                    }
-                };
-                
-                updateCounter();
+        // Smooth section scrolling with ScrollTrigger
+        const sections = document.querySelectorAll('section[id]');
+        
+        sections.forEach((section, index) => {
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top 80px",
+                end: "bottom 20%",
+                onEnter: () => {
+                    gsap.to(window, {
+                        duration: 0.8,
+                        scrollTo: { y: section, offsetY: 80 },
+                        ease: "power2.inOut"
+                    });
+                },
+                onEnterBack: () => {
+                    gsap.to(window, {
+                        duration: 0.8,
+                        scrollTo: { y: section, offsetY: 80 },
+                        ease: "power2.inOut"
+                    });
+                }
             });
+        });
+
+        // Snap to sections on wheel with debouncing
+        let isScrolling = false;
+        let scrollTimeout;
+        
+        window.addEventListener('wheel', (e) => {
+            if (isScrolling) return;
+            
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                const currentSection = getCurrentSection();
+                if (currentSection) {
+                    const sections = Array.from(document.querySelectorAll('section[id]'));
+                    const currentIndex = sections.indexOf(currentSection);
+                    
+                    if (e.deltaY > 0 && currentIndex < sections.length - 1) {
+                        // Scroll to next section
+                        isScrolling = true;
+                        gsap.to(window, {
+                            duration: 0.8,
+                            scrollTo: { y: sections[currentIndex + 1], offsetY: 80 },
+                            ease: "power2.inOut",
+                            onComplete: () => {
+                                setTimeout(() => { isScrolling = false; }, 100);
+                            }
+                        });
+                    } else if (e.deltaY < 0 && currentIndex > 0) {
+                        // Scroll to previous section
+                        isScrolling = true;
+                        gsap.to(window, {
+                            duration: 0.8,
+                            scrollTo: { y: sections[currentIndex - 1], offsetY: 80 },
+                            ease: "power2.inOut",
+                            onComplete: () => {
+                                setTimeout(() => { isScrolling = false; }, 100);
+                            }
+                        });
+                    }
+                }
+            }, 50);
+        }, { passive: true });
+
+        // Helper function to get current section in view
+        function getCurrentSection() {
+            const scrollY = window.pageYOffset + window.innerHeight / 2;
+            const sections = document.querySelectorAll('section[id]');
+            
+            let currentSection = null;
+            let minDistance = Infinity;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const distance = Math.abs((rect.top + window.pageYOffset) - scrollY);
+                
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    currentSection = section;
+                }
+            });
+            
+            return currentSection;
         }
+
+        // Keyboard navigation for sections
+        window.addEventListener('keydown', (e) => {
+            if (isScrolling) return;
+            
+            const sections = Array.from(document.querySelectorAll('section[id]'));
+            const currentSection = getCurrentSection();
+            const currentIndex = currentSection ? sections.indexOf(currentSection) : -1;
+            
+            if (e.key === 'ArrowDown' && currentIndex < sections.length - 1) {
+                e.preventDefault();
+                isScrolling = true;
+                gsap.to(window, {
+                    duration: 0.8,
+                    scrollTo: { y: sections[currentIndex + 1], offsetY: 80 },
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        setTimeout(() => { isScrolling = false; }, 100);
+                    }
+                });
+            } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+                e.preventDefault();
+                isScrolling = true;
+                gsap.to(window, {
+                    duration: 0.8,
+                    scrollTo: { y: sections[currentIndex - 1], offsetY: 80 },
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        setTimeout(() => { isScrolling = false; }, 100);
+                    }
+                });
+            }
+        });
+
+        // Update active navigation based on current section
+        ScrollTrigger.create({
+            start: 0,
+            end: "max",
+            onUpdate: (self) => {
+                const currentSection = getCurrentSection();
+                if (currentSection) {
+                    // Update nav active states
+                    document.querySelectorAll('.nav-links a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${currentSection.id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            }
+        });
+
+        // GSAP ScrollTrigger Animations
+        // Section headers
+        gsap.utils.toArray('.section-header').forEach(header => {
+            gsap.fromTo(header,
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: header,
+                        start: "top 80%",
+                        end: "bottom 20%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Service cards
+        gsap.utils.toArray('.service-card').forEach((card, index) => {
+            gsap.fromTo(card,
+                { opacity: 0, y: 50, scale: 0.9 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.6,
+                    delay: index * 0.1,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 85%",
+                        end: "bottom 15%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Team cards
+        gsap.utils.toArray('.team-card').forEach((card, index) => {
+            gsap.fromTo(card,
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: index * 0.15,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 85%",
+                        end: "bottom 15%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Partner cards
+        gsap.utils.toArray('.partner-card').forEach((card, index) => {
+            gsap.fromTo(card,
+                { opacity: 0, scale: 0.8 },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.6,
+                    delay: index * 0.1,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 85%",
+                        end: "bottom 15%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Value cards
+        gsap.utils.toArray('.value-card').forEach((card, index) => {
+            gsap.fromTo(card,
+                { opacity: 0, x: -50 },
+                {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.6,
+                    delay: index * 0.1,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 85%",
+                        end: "bottom 15%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        // Contact form
+        gsap.fromTo('.contact-info',
+            { opacity: 0, x: -50 },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: '.contact',
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+
+        gsap.fromTo('.contact-form',
+            { opacity: 0, x: 50 },
+            {
+                opacity: 1,
+                x: 0,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: '.contact',
+                    start: "top 80%",
+                    end: "bottom 20%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
 
         // Form Submission
         document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Thank you for your interest! We will contact you within 24 hours to discuss your transformation goals.');
-            e.target.reset();
+            
+            // Animate form feedback
+            gsap.to('.contact-form', {
+                scale: 0.98,
+                duration: 0.1,
+                yoyo: true,
+                repeat: 1,
+                ease: "power2.inOut",
+                onComplete: () => {
+                    alert('Thank you for your interest! We will contact you within 24 hours to discuss your transformation goals.');
+                    e.target.reset();
+                }
+            });
         });
 
         // Dynamic Year in Footer
         document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} Hanzumana-Asheazi-Tebe-Tebe Consulting and Investments Limited. All rights reserved.`;
+
+        // Hover animations with GSAP
+        document.querySelectorAll('.service-card, .partner-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    scale: 1.05,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+        });
+
+        // Team card hover with image zoom
+        document.querySelectorAll('.team-card').forEach(card => {
+            const image = card.querySelector('.team-image img');
+            
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    scale: 1.03,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+                
+                if (image) {
+                    gsap.to(image, {
+                        scale: 1.1,
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+                
+                if (image) {
+                    gsap.to(image, {
+                        scale: 1,
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                }
+            });
+        });
+
+        document.querySelectorAll('.service-card, .team-card, .partner-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    scale: 1.05,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+        });
+
+        // Logo hover animation
+        document.querySelectorAll('.logo img').forEach(logo => {
+            logo.addEventListener('mouseenter', () => {
+                gsap.to(logo, {
+                    scale: 1.05,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            logo.addEventListener('mouseleave', () => {
+                gsap.to(logo, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+        });
     </script>
 </body>
 </html>
