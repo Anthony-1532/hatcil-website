@@ -69,7 +69,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem; 
+            gap: 2rem;
         }
 
         .nav-links a {
@@ -808,7 +808,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 fade-in">
                 <div class="team-card">
                     <div class="team-image">
-                        <img src="asset/yakubu.png" alt="Professor Yakubu Ochefu">
+                        <img src="asset/yakubu.jpg" alt="Professor Yakubu Ochefu">
                     </div>
                     <div class="team-info">
                         <h3>Professor Yakubu Ochefu</h3>
@@ -1007,7 +1007,7 @@
             } else {
                 navLinks.style.display = 'flex';
                 navLinks.classList.add('active');
-                gsap.fromTo(navLinks, 
+                gsap.fromTo(navLinks,
                     { opacity: 0, y: -20 },
                     { duration: 0.3, opacity: 1, y: 0 }
                 );
@@ -1082,8 +1082,8 @@
             const counters = document.querySelectorAll('.stat-number');
             counters.forEach((counter, index) => {
                 const target = +counter.getAttribute('data-target');
-                
-                gsap.fromTo(counter, 
+
+                gsap.fromTo(counter,
                     { textContent: 0 },
                     {
                         textContent: target,
@@ -1117,7 +1117,7 @@
 
         // Smooth section scrolling with ScrollTrigger
         const sections = document.querySelectorAll('section[id]');
-        
+
         sections.forEach((section, index) => {
             ScrollTrigger.create({
                 trigger: section,
@@ -1143,17 +1143,17 @@
         // Snap to sections on wheel with debouncing
         let isScrolling = false;
         let scrollTimeout;
-        
+
         window.addEventListener('wheel', (e) => {
             if (isScrolling) return;
-            
+
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 const currentSection = getCurrentSection();
                 if (currentSection) {
                     const sections = Array.from(document.querySelectorAll('section[id]'));
                     const currentIndex = sections.indexOf(currentSection);
-                    
+
                     if (e.deltaY > 0 && currentIndex < sections.length - 1) {
                         // Scroll to next section
                         isScrolling = true;
@@ -1185,31 +1185,31 @@
         function getCurrentSection() {
             const scrollY = window.pageYOffset + window.innerHeight / 2;
             const sections = document.querySelectorAll('section[id]');
-            
+
             let currentSection = null;
             let minDistance = Infinity;
-            
+
             sections.forEach(section => {
                 const rect = section.getBoundingClientRect();
                 const distance = Math.abs((rect.top + window.pageYOffset) - scrollY);
-                
+
                 if (distance < minDistance) {
                     minDistance = distance;
                     currentSection = section;
                 }
             });
-            
+
             return currentSection;
         }
 
         // Keyboard navigation for sections
         window.addEventListener('keydown', (e) => {
             if (isScrolling) return;
-            
+
             const sections = Array.from(document.querySelectorAll('section[id]'));
             const currentSection = getCurrentSection();
             const currentIndex = currentSection ? sections.indexOf(currentSection) : -1;
-            
+
             if (e.key === 'ArrowDown' && currentIndex < sections.length - 1) {
                 e.preventDefault();
                 isScrolling = true;
@@ -1383,7 +1383,7 @@
         // Form Submission
         document.getElementById('contactForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            
+
             // Animate form feedback
             gsap.to('.contact-form', {
                 scale: 0.98,
@@ -1423,14 +1423,14 @@
         // Team card hover with image zoom
         document.querySelectorAll('.team-card').forEach(card => {
             const image = card.querySelector('.team-image img');
-            
+
             card.addEventListener('mouseenter', () => {
                 gsap.to(card, {
                     scale: 1.03,
                     duration: 0.3,
                     ease: "power2.out"
                 });
-                
+
                 if (image) {
                     gsap.to(image, {
                         scale: 1.1,
@@ -1446,7 +1446,7 @@
                     duration: 0.3,
                     ease: "power2.out"
                 });
-                
+
                 if (image) {
                     gsap.to(image, {
                         scale: 1,
