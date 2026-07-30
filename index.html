@@ -23,6 +23,11 @@
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
         }
 
+        /* Base */
+        html, body {
+            height: 100%;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             overflow-x: hidden;
@@ -30,7 +35,11 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
+
+        img { max-width: 100%; height: auto; display: block; }
 
         h1, h2, h3, h4, h5, h6, .nav-links a, .btn {
             font-family: 'Montserrat', sans-serif;
@@ -62,10 +71,6 @@
             transition: transform 0.3s ease;
         }
 
-        .logo:hover img {
-            transform: scale(1.05);
-        }
-
         .nav-links {
             display: flex;
             list-style: none;
@@ -77,6 +82,7 @@
             color: var(--text-dark);
             font-weight: 500;
             transition: color 0.3s;
+            padding: 0.5rem 0.25rem;
         }
 
         .nav-links a:hover,
@@ -88,14 +94,16 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
+            gap: 4px;
+            padding: 6px;
         }
 
         .mobile-menu span {
             width: 25px;
             height: 3px;
             background: var(--primary-color);
-            margin: 3px 0;
             transition: 0.3s;
+            border-radius: 2px;
         }
 
         /* Hero Section */
@@ -116,8 +124,9 @@
             position: absolute;
             width: 200%;
             height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.06)"/></svg>') repeat;
             animation: float 20s linear infinite;
+            opacity: 0.25;
         }
 
         @keyframes float {
@@ -134,6 +143,7 @@
             position: relative;
             z-index: 1;
             min-height: 400px;
+            gap: 2rem;
         }
 
         .hero-text {
@@ -164,17 +174,16 @@
             line-height: 1.6;
         }
 
-
-
         .btn {
             padding: 1rem 2rem;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
-            transition: all 0.3s;
+            transition: all 0.25s;
             cursor: pointer;
             border: none;
             font-size: 1rem;
+            display: inline-block;
         }
 
         .btn-primary {
@@ -206,23 +215,24 @@
         }
 
         .stat {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(8px);
+            padding: 1.25rem;
+            border-radius: 12px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.08);
         }
 
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: bold;
             color: var(--secondary-color);
         }
 
         .stat-label {
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.85);
             margin-top: 0.5rem;
+            font-size: 0.95rem;
         }
 
         /* Logo in Hero */
@@ -230,7 +240,6 @@
             width: 100%;
             height: 320px;
             background: transparent;
-            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -247,301 +256,65 @@
             filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
         }
 
-        /* Logo in Footer */
-        .footer-logo {
-            text-align: center;
-        }
-        .footer-logo img {
-            height: 60px;
-            width: auto;
-            margin-bottom: 1.5rem;
-        }
+        /* Footer */
+        .footer-logo { text-align: center; }
+        .footer-logo img { height: 60px; width: auto; margin-bottom: 1.5rem; }
 
         /* Sections */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; }
+        .section-header p { font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto; }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
+        .service-card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: box-shadow 0.25s, transform 0.25s; position: relative; overflow: hidden; }
+        .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--accent-color); transition: width 0.3s; }
+        .service-card:hover::before { width: 100%; opacity: 0.06; }
+        .service-card:hover { transform: translateY(-6px); box-shadow: 0 18px 36px rgba(0,0,0,0.12); }
 
-        .section-header p {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+        .service-icon { width: 60px; height: 60px; background: var(--gradient); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; font-size: 1.5rem; color: white; }
 
-
-
-
-
-        .service-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: var(--accent-color);
-            transition: width 0.3s;
-        }
-
-        .service-card:hover::before {
-            width: 100%;
-            opacity: 0.1;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .service-features {
-            list-style: none;
-            margin-top: 1.5rem;
-        }
-
-        .service-features li {
-            padding: 0.5rem 0;
-            color: #555;
-            position: relative;
-            padding-left: 1.5rem;
-        }
-
-        .service-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-            font-weight: bold;
-        }
+        .service-card h3 { font-size: 1.25rem; margin-bottom: 1rem; color: var(--primary-color); }
+        .service-features { list-style: none; margin-top: 1.5rem; }
+        .service-features li { padding: 0.5rem 0; color: #555; position: relative; padding-left: 1.5rem; }
+        .service-features li::before { content: '✓'; position: absolute; left: 0; color: var(--accent-color); font-weight: bold; }
 
         /* About */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .values-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2rem; }
+        .value-card { padding: 1.5rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); border-left: 4px solid var(--accent-color); }
 
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .value-card {
-            padding: 1.5rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border-left: 4px solid var(--accent-color);
-        }
-
-        .value-card h4 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-
-
-
-
-        .team-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .team-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .team-image {
-            width: 100%;
-            height: 300px;
-            background: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .team-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
-            transition: transform 0.3s ease;
-        }
-
-        .team-info {
-            padding: 2rem;
-        }
-
-        .team-info h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .team-title {
-            color: var(--accent-color);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .team-bio {
-            color: #666;
-            line-height: 1.6;
-        }
+        /* Team */
+        .team-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .team-card:hover { transform: translateY(-5px); }
+        .team-image { width: 100%; height: 300px; background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; overflow: hidden; position: relative; }
+        .team-image img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.3s ease; }
+        .team-info { padding: 2rem; }
+        .team-info h3 { color: var(--primary-color); margin-bottom: 0.5rem; }
+        .team-title { color: var(--accent-color); font-weight: 600; margin-bottom: 1rem; }
+        .team-bio { color: #666; line-height: 1.6; }
 
         /* Partners */
+        .partner-card { background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; transition: transform 0.25s, box-shadow 0.25s; }
+        .partner-card:hover { transform: scale(1.03); box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .partner-logo { width: 80px; height: 80px; background: var(--bg-light); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--primary-color); }
 
-
-        .partner-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .partner-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .partner-logo {
-            width: 80px;
-            height: 80px;
-            background: var(--bg-light);
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-
-
-
-
-        .contact-info h3 {
-            margin-bottom: 1.5rem;
-            color: var(--secondary-color);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            gap: 1rem;
-        }
-
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .contact-form {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            margin: 0;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
+        .contact-info h3 { margin-bottom: 1.5rem; color: var(--secondary-color); }
+        .contact-item { display: flex; align-items: center; margin-bottom: 1.5rem; gap: 1rem; }
+        .contact-icon { width: 40px; height: 40px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .contact-form { background: rgba(255,255,255,0.06); padding: 2rem; border-radius: 20px; backdrop-filter: blur(10px); margin: 0; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 1rem; border: none; border-radius: 10px; font-size: 1rem; }
+        .form-group textarea { resize: vertical; min-height: 120px; }
 
         /* Footer */
-        footer {
-            background: #051423;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+        footer { background: #051423; color: white; text-align: center; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 
-        /* Mobile Responsive */
+        /* Mobile Responsive Improvements */
         @media (max-width: 768px) {
+            .nav-container { padding: 0.5rem 1rem; }
+
             .nav-links {
                 display: none;
                 position: absolute;
@@ -551,88 +324,64 @@
                 background: white;
                 flex-direction: column;
                 padding: 1rem;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.08);
                 z-index: 999;
+                gap: 0;
             }
 
-            .nav-links.active {
-                display: flex;
-            }
+            .nav-links.active { display: flex; }
 
-            .mobile-menu {
-                display: flex;
-            }
+            .mobile-menu { display: flex; }
 
             .about-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 2rem;
-            }
+            .contact-content { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
 
-            .hero-text h1 {
-                font-size: 2.2rem;
-                line-height: 1.1;
-            }
+            .hero-text h1 { font-size: 2rem; line-height: 1.1; }
 
-            .hero-logo {
-                height: 200px;
-            }
+            .hero-content { padding: 0 1rem; flex-direction: column; align-items: flex-start; min-height: 50vh; }
 
-        .hero-stats {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin-top: 2rem;
-        }
+            .hero { background-position: center top; min-height: 55vh; }
 
-            .values-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero::before { display: none; }
 
-            .logo img {
-                height: 40px;
-            }
+            .hero-logo { height: 180px; }
 
-            .team-image {
-                height: 250px;
-            }
+            .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; }
+
+            .values-grid { grid-template-columns: 1fr; }
+
+            .logo img { height: 40px; }
+
+            .team-image { height: 200px; }
+
+            .btn { padding: 0.7rem 1rem; font-size: 0.95rem; }
+
+            .contact-form { padding: 1rem; }
+
+            .section-header { margin-bottom: 2rem; }
+
+            .service-card { padding: 1.25rem; }
+
+            .service-card h3 { font-size: 1.05rem; }
+
+            .nav-links a { padding: 0.75rem 0.5rem; }
+
+            /* Make nav links easy to tap */
+            .nav-links li { border-bottom: 1px solid rgba(0,0,0,0.04); }
+
+            .nav-links a { display: block; width: 100%; }
         }
 
         /* Animations */
-        .fade-in {
-            opacity: 1;
-        }
-
-        /* Section snap points */
-        html {
-            scroll-behavior: auto;
-        }
+        .fade-in { opacity: 1; }
 
         /* Remove existing hover transitions to prevent conflicts with GSAP */
-        .service-card,
-        .team-card,
-        .partner-card {
-            transition: none;
-        }
-
-        .logo img {
-            transition: none;
-        }
+        .service-card, .team-card, .partner-card { transition: none; }
+        .logo img { transition: none; }
 
         /* Active nav link styling */
-        .nav-links a.active {
-            position: relative;
-        }
-
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--accent-color);
-        }
+        .nav-links a.active { position: relative; }
+        .nav-links a.active::after { content: ''; position: absolute; bottom: -5px; left: 0; right: 0; height: 2px; background: var(--accent-color); }
     </style>
 </head>
 <body>
@@ -640,7 +389,7 @@
     <nav>
         <div class="nav-container">
             <div class="logo">
-                <img src="asset/logo.jpg"></img>
+                <img src="asset/logo.jpg" alt="HATCIL logo">
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
@@ -650,11 +399,11 @@
                 <li><a href="#partners">Partners</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="mobile-menu" id="mobileMenu">
+            <button class="mobile-menu" id="mobileMenu" aria-label="Toggle navigation" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -664,8 +413,8 @@
             <div class="hero-text">
                 <h1>Transforming Institutions Through Innovation Excellence</h1>
                 <p class="tagline">Premier Industry 4.0 Transformation Consultancy for Africa</p>
-                <p>Bridging the gap between traditional operations and future-ready environments, integrating digital innovation, research excellence, and sustainable practices across educational institutions.</p>
-                <div class="flex gap-4 flex-wrap">
+                <p>Bridging the gap between traditional operations and future-ready environments, integrating digital innovation, research excellence, and sustainable practices across educational institutions and industry partners.</p>
+                <div class="flex gap-4 flex-wrap" style="margin-top:1rem;">
                     <a href="#contact" class="btn btn-primary">Partner With Us</a>
                     <a href="#services" class="btn btn-secondary">Our Services</a>
                 </div>
@@ -744,7 +493,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 fade-in">
                 <div class="service-card">
                     <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-9.56 1.59 1.59 0 0 1 2.15-2.15 22 22 0 0 1 9.6 2 1.59 1.59 0 0 1 2.15 2.15 22 22 0 0 1-9.56 2z"/><path d="m5 14 1.76 1.76a2 2 0 0 0 2.83 2.83L11.41 16"/></svg>
+                        <!-- icon -->
                     </div>
                     <h3>Digital Transformation & Emerging Technologies</h3>
                     <p>Deploy advanced digital infrastructure that redefines institutional operations and value delivery.</p>
@@ -756,9 +505,7 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1 2-2V6a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2Z"/><path d="M12 6h5a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-2"/></svg>
-                    </div>
+                    <div class="service-icon"></div>
                     <h3>Research, Innovation & Advanced Manufacturing</h3>
                     <p>Establish research ecosystems that bridge academia and industry.</p>
                     <ul class="service-features">
@@ -769,9 +516,7 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M5 22H2v-5a10 10 0 0 1 10-10"/><path d="M22 22h-3v-5a10 10 0 0 0-10-10"/></svg>
-                    </div>
+                    <div class="service-icon"></div>
                     <h3>Sustainable Agriculture & Food Security</h3>
                     <p>Implement precision agriculture and sustainable food production systems.</p>
                     <ul class="service-features">
@@ -782,9 +527,7 @@
                     </ul>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                    </div>
+                    <div class="service-icon"></div>
                     <h3>Sustainability & Future Skills</h3>
                     <p>Create environmentally responsible institutions while preparing future workforces.</p>
                     <ul class="service-features">
@@ -813,7 +556,7 @@
                     <div class="team-info">
                         <h3>Professor Yakubu Ochefu</h3>
                         <div class="team-title">Lead Consultant</div>
-                        <p class="team-bio">Four decades of academic leadership expertise. Former Vice-Chancellor of Kwararafa University and Secretary-General of the Committee of Vice-Chancellors of Nigerian Universities. International consulting experience with World Bank, UNDP, and university transformation projects across Nigeria, Liberia, Ghana, and Uganda.</p>
+                        <p class="team-bio">Four decades of academic leadership expertise. Former Vice-Chancellor of Kwararafa University and Secretary-General of the Committee of Vice-Chancellor...</p>
                     </div>
                 </div>
                 <div class="team-card">
@@ -823,7 +566,7 @@
                     <div class="team-info">
                         <h3>Gloria Kumawuese Kurga</h3>
                         <div class="team-title">Principal Consultant</div>
-                        <p class="team-bio">Results-oriented professional specializing in program coordination and strategic event management. Master's in Leadership and Organization from University of Malmo. Coordinated high-impact projects including AI Hub gatherings of 150+ attendees. Founder of LuSam Innovative Services.</p>
+                        <p class="team-bio">Results-oriented professional specializing in program coordination and strategic event management...</p>
                     </div>
                 </div>
                 <div class="team-card">
@@ -833,7 +576,7 @@
                     <div class="team-info">
                         <h3>Amara Ochefu</h3>
                         <div class="team-title">Principal Consultant</div>
-                        <p class="team-bio">Next-generation global education consultant with BA (Hons) Politics from Loughborough University. International experience as Assistant Language Teacher in Tokyo and former Program Associate at Malala Fund. Multilingual in English, Spanish, and Japanese with expertise in curriculum innovation and policy development.</p>
+                        <p class="team-bio">Next-generation global education consultant with BA (Hons) Politics from Loughborough University...</p>
                     </div>
                 </div>
                 <div class="team-card">
@@ -843,7 +586,7 @@
                     <div class="team-info">
                         <h3>Dumebi Ikenye-Ochefu</h3>
                         <div class="team-title">Senior Consultant</div>
-                        <p class="team-bio">Strategic operations specialist with expertise in data systems management and compliance auditing. M.Sc. in Defence and Strategic Studies. Transforms complex organizational challenges into streamlined solutions with experience in oil and gas compliance and national conference coordination.</p>
+                        <p class="team-bio">Strategic operations specialist with expertise in data systems management and compliance auditing...</p>
                     </div>
                 </div>
             </div>
@@ -914,7 +657,7 @@
                     <h3>Get In Touch</h3>
                     <div class="contact-item">
                         <div class="contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <!-- svg -->
                         </div>
                         <div>
                             <strong>Address</strong><br>
@@ -922,27 +665,21 @@
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                        </div>
+                        <div class="contact-icon"></div>
                         <div>
                             <strong>Email</strong><br>
                             hattcil@outlook.com
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        </div>
+                        <div class="contact-icon"></div>
                         <div>
                             <strong>Phone</strong><br>
                             +234 915 540 9662
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                        </div>
+                        <div class="contact-icon"></div>
                         <div>
                             <strong>Website</strong><br>
                             hatcil.com
@@ -977,7 +714,7 @@
     <!-- Footer -->
     <footer>
     <div class="footer-logo">
-        <img src="asset/logo.jpg">
+        <img src="asset/logo.jpg" alt="HATCIL logo">
     </div>
         <p>&copy; 2026 Hanzumana-Asheazi-Tebe-Tebe Consulting and Investments Limited. All rights reserved.</p>
         <p>Transforming Institutions Through Innovation Excellence</p>
@@ -986,512 +723,95 @@
 
     <script>
         // Register GSAP plugins
-        gsap.registerPlugin(ScrollTrigger);
+        if (window.gsap && window.ScrollTrigger) {
+            gsap.registerPlugin(ScrollTrigger);
+        }
 
-        // Mobile Menu Toggle
+        // Mobile Menu Toggle (improved)
         const mobileMenu = document.getElementById('mobileMenu');
         const navLinks = document.getElementById('navLinks');
 
-        // Animate mobile menu with GSAP
-        mobileMenu.addEventListener('click', () => {
-            if (navLinks.classList.contains('active')) {
-                gsap.to(navLinks, {
-                    duration: 0.3,
-                    opacity: 0,
-                    y: -20,
-                    onComplete: () => {
-                        navLinks.classList.remove('active');
-                        navLinks.style.display = 'none';
-                    }
-                });
+        function toggleNav() {
+            const isActive = navLinks.classList.toggle('active');
+            mobileMenu.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+            // small animation for hamburger
+            const spans = mobileMenu.querySelectorAll('span');
+            if (isActive) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
             } else {
-                navLinks.style.display = 'flex';
-                navLinks.classList.add('active');
-                gsap.fromTo(navLinks,
-                    { opacity: 0, y: -20 },
-                    { duration: 0.3, opacity: 1, y: 0 }
-                );
+                spans[0].style.transform = '';
+                spans[1].style.opacity = '';
+                spans[2].style.transform = '';
             }
-        });
-
-        // Smooth Scrolling with GSAP
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    isScrolling = true;
-                    gsap.to(window, {
-                        duration: 1,
-                        scrollTo: { y: target, offsetY: 80 },
-                        ease: "power2.inOut",
-                        onComplete: () => {
-                            setTimeout(() => { isScrolling = false; }, 100);
-                        }
-                    });
-                    navLinks.classList.remove('active');
-                }
-            });
-        });
-
-        // GSAP Animations on Load
-        window.addEventListener('load', () => {
-            // Animate hero content with staggered left-to-right entrance
-            gsap.from('.hero-text h1', {
-                duration: 1.2,
-                opacity: 0,
-                x: -80,
-                ease: "power3.out"
-            });
-
-            gsap.from('.hero-text .tagline', {
-                duration: 1,
-                opacity: 0,
-                x: -60,
-                delay: 0.2,
-                ease: "power3.out"
-            });
-
-            gsap.from('.hero-text p', {
-                duration: 1,
-                opacity: 0,
-                x: -40,
-                delay: 0.4,
-                ease: "power3.out"
-            });
-
-            gsap.from('.flex.gap-4', {
-                duration: 1,
-                opacity: 0,
-                y: 30,
-                delay: 0.6,
-                ease: "power3.out"
-            });
-
-            // Animate stats from bottom with stagger
-            gsap.from('.stat', {
-                duration: 0.8,
-                opacity: 0,
-                y: 40,
-                stagger: 0.1,
-                delay: 0.8,
-                ease: "back.out(1.2)"
-            });
-
-            // Animate stats with counter
-            const counters = document.querySelectorAll('.stat-number');
-            counters.forEach((counter, index) => {
-                const target = +counter.getAttribute('data-target');
-
-                gsap.fromTo(counter,
-                    { textContent: 0 },
-                    {
-                        textContent: target,
-                        duration: 2,
-                        delay: 1.2 + (index * 0.2),
-                        ease: "power2.out",
-                        snap: { textContent: 1 },
-                        onUpdate: function() {
-                            counter.textContent = Math.ceil(counter.textContent) + (counter.parentElement.textContent.includes('%') ? '' : '+');
-                        }
-                    }
-                );
-            });
-
-            // Animate navigation
-            gsap.from('.nav-container', {
-                duration: 1,
-                opacity: 0,
-                y: -20,
-                ease: "power3.out"
-            });
-
-            // Hero background animation
-            gsap.to('.hero::before', {
-                rotation: 360,
-                duration: 20,
-                repeat: -1,
-                ease: "none"
-            });
-        });
-
-        // Smooth section scrolling with ScrollTrigger
-        const sections = document.querySelectorAll('section[id]');
-
-        sections.forEach((section, index) => {
-            ScrollTrigger.create({
-                trigger: section,
-                start: "top 80px",
-                end: "bottom 20%",
-                onEnter: () => {
-                    gsap.to(window, {
-                        duration: 0.8,
-                        scrollTo: { y: section, offsetY: 80 },
-                        ease: "power2.inOut"
-                    });
-                },
-                onEnterBack: () => {
-                    gsap.to(window, {
-                        duration: 0.8,
-                        scrollTo: { y: section, offsetY: 80 },
-                        ease: "power2.inOut"
-                    });
-                }
-            });
-        });
-
-        // Snap to sections on wheel with debouncing
-        let isScrolling = false;
-        let scrollTimeout;
-
-        window.addEventListener('wheel', (e) => {
-            if (isScrolling) return;
-
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                const currentSection = getCurrentSection();
-                if (currentSection) {
-                    const sections = Array.from(document.querySelectorAll('section[id]'));
-                    const currentIndex = sections.indexOf(currentSection);
-
-                    if (e.deltaY > 0 && currentIndex < sections.length - 1) {
-                        // Scroll to next section
-                        isScrolling = true;
-                        gsap.to(window, {
-                            duration: 0.8,
-                            scrollTo: { y: sections[currentIndex + 1], offsetY: 80 },
-                            ease: "power2.inOut",
-                            onComplete: () => {
-                                setTimeout(() => { isScrolling = false; }, 100);
-                            }
-                        });
-                    } else if (e.deltaY < 0 && currentIndex > 0) {
-                        // Scroll to previous section
-                        isScrolling = true;
-                        gsap.to(window, {
-                            duration: 0.8,
-                            scrollTo: { y: sections[currentIndex - 1], offsetY: 80 },
-                            ease: "power2.inOut",
-                            onComplete: () => {
-                                setTimeout(() => { isScrolling = false; }, 100);
-                            }
-                        });
-                    }
-                }
-            }, 50);
-        }, { passive: true });
-
-        // Helper function to get current section in view
-        function getCurrentSection() {
-            const scrollY = window.pageYOffset + window.innerHeight / 2;
-            const sections = document.querySelectorAll('section[id]');
-
-            let currentSection = null;
-            let minDistance = Infinity;
-
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                const distance = Math.abs((rect.top + window.pageYOffset) - scrollY);
-
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    currentSection = section;
-                }
-            });
-
-            return currentSection;
         }
 
-        // Keyboard navigation for sections
-        window.addEventListener('keydown', (e) => {
-            if (isScrolling) return;
+        mobileMenu.addEventListener('click', toggleNav);
 
-            const sections = Array.from(document.querySelectorAll('section[id]'));
-            const currentSection = getCurrentSection();
-            const currentIndex = currentSection ? sections.indexOf(currentSection) : -1;
-
-            if (e.key === 'ArrowDown' && currentIndex < sections.length - 1) {
-                e.preventDefault();
-                isScrolling = true;
-                gsap.to(window, {
-                    duration: 0.8,
-                    scrollTo: { y: sections[currentIndex + 1], offsetY: 80 },
-                    ease: "power2.inOut",
-                    onComplete: () => {
-                        setTimeout(() => { isScrolling = false; }, 100);
-                    }
-                });
-            } else if (e.key === 'ArrowUp' && currentIndex > 0) {
-                e.preventDefault();
-                isScrolling = true;
-                gsap.to(window, {
-                    duration: 0.8,
-                    scrollTo: { y: sections[currentIndex - 1], offsetY: 80 },
-                    ease: "power2.inOut",
-                    onComplete: () => {
-                        setTimeout(() => { isScrolling = false; }, 100);
-                    }
-                });
+        // Close nav when a link is clicked (mobile)
+        navLinks.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A' && window.innerWidth <= 768) {
+                navLinks.classList.remove('active');
+                mobileMenu.setAttribute('aria-expanded', 'false');
+                const spans = mobileMenu.querySelectorAll('span');
+                spans[0].style.transform = '';
+                spans[1].style.opacity = '';
+                spans[2].style.transform = '';
             }
         });
 
-        // Update active navigation based on current section
-        ScrollTrigger.create({
-            start: 0,
-            end: "max",
-            onUpdate: (self) => {
-                const currentSection = getCurrentSection();
-                if (currentSection) {
-                    // Update nav active states
-                    document.querySelectorAll('.nav-links a').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${currentSection.id}`) {
-                            link.classList.add('active');
-                        }
-                    });
+        // Simple stat counter animation (mobile-friendly)
+        const counters = document.querySelectorAll('.stat-number');
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target') || 0;
+            let current = 0;
+            const step = Math.max(1, Math.floor(target / 60));
+            function update() {
+                current += step;
+                if (current >= target) {
+                    counter.textContent = target;
+                } else {
+                    counter.textContent = current;
+                    requestAnimationFrame(update);
                 }
             }
+            // Start when visible
+            const io = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        update();
+                        io.disconnect();
+                    }
+                });
+            }, { threshold: 0.4 });
+            io.observe(counter);
         });
 
-        // GSAP ScrollTrigger Animations
-        // Section headers
-        gsap.utils.toArray('.section-header').forEach(header => {
-            gsap.fromTo(header,
-                { opacity: 0, y: 50 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    scrollTrigger: {
-                        trigger: header,
-                        start: "top 80%",
-                        end: "bottom 20%",
-                        toggleActions: "play none none reverse"
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href.length > 1) {
+                    e.preventDefault();
+                    const el = document.querySelector(href);
+                    if (el) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 }
-            );
+            });
         });
 
-        // Service cards
-        gsap.utils.toArray('.service-card').forEach((card, index) => {
-            gsap.fromTo(card,
-                { opacity: 0, y: 50, scale: 0.9 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    duration: 0.6,
-                    delay: index * 0.1,
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 85%",
-                        end: "bottom 15%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        });
-
-        // Team cards
-        gsap.utils.toArray('.team-card').forEach((card, index) => {
-            gsap.fromTo(card,
-                { opacity: 0, y: 50 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8,
-                    delay: index * 0.15,
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 85%",
-                        end: "bottom 15%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        });
-
-        // Partner cards
-        gsap.utils.toArray('.partner-card').forEach((card, index) => {
-            gsap.fromTo(card,
-                { opacity: 0, scale: 0.8 },
-                {
-                    opacity: 1,
-                    scale: 1,
-                    duration: 0.6,
-                    delay: index * 0.1,
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 85%",
-                        end: "bottom 15%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        });
-
-        // Value cards
-        gsap.utils.toArray('.value-card').forEach((card, index) => {
-            gsap.fromTo(card,
-                { opacity: 0, x: -50 },
-                {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.6,
-                    delay: index * 0.1,
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 85%",
-                        end: "bottom 15%",
-                        toggleActions: "play none none reverse"
-                    }
-                }
-            );
-        });
-
-        // Contact form
-        gsap.fromTo('.contact-info',
-            { opacity: 0, x: -50 },
-            {
-                opacity: 1,
-                x: 0,
-                duration: 1,
-                scrollTrigger: {
-                    trigger: '.contact',
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    toggleActions: "play none none reverse"
-                }
+        // Accessibility: allow Esc to close mobile nav
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileMenu.setAttribute('aria-expanded', 'false');
+                const spans = mobileMenu.querySelectorAll('span');
+                spans[0].style.transform = '';
+                spans[1].style.opacity = '';
+                spans[2].style.transform = '';
             }
-        );
-
-        gsap.fromTo('.contact-form',
-            { opacity: 0, x: 50 },
-            {
-                opacity: 1,
-                x: 0,
-                duration: 1,
-                scrollTrigger: {
-                    trigger: '.contact',
-                    start: "top 80%",
-                    end: "bottom 20%",
-                    toggleActions: "play none none reverse"
-                }
-            }
-        );
-
-        // Form Submission
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Animate form feedback
-            gsap.to('.contact-form', {
-                scale: 0.98,
-                duration: 0.1,
-                yoyo: true,
-                repeat: 1,
-                ease: "power2.inOut",
-                onComplete: () => {
-                    alert('Thank you for your interest! We will contact you within 24 hours to discuss your transformation goals.');
-                    e.target.reset();
-                }
-            });
-        });
-
-        // Dynamic Year in Footer
-        document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} Hanzumana-Asheazi-Tebe-Tebe Consulting and Investments Limited. All rights reserved.`;
-
-        // Hover animations with GSAP
-        document.querySelectorAll('.service-card, .partner-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                gsap.to(card, {
-                    scale: 1.05,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
-
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card, {
-                    scale: 1,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
-        });
-
-        // Team card hover with image zoom
-        document.querySelectorAll('.team-card').forEach(card => {
-            const image = card.querySelector('.team-image img');
-
-            card.addEventListener('mouseenter', () => {
-                gsap.to(card, {
-                    scale: 1.03,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-
-                if (image) {
-                    gsap.to(image, {
-                        scale: 1.1,
-                        duration: 0.3,
-                        ease: "power2.out"
-                    });
-                }
-            });
-
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card, {
-                    scale: 1,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-
-                if (image) {
-                    gsap.to(image, {
-                        scale: 1,
-                        duration: 0.3,
-                        ease: "power2.out"
-                    });
-                }
-            });
-        });
-
-        document.querySelectorAll('.service-card, .team-card, .partner-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                gsap.to(card, {
-                    scale: 1.05,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
-
-            card.addEventListener('mouseleave', () => {
-                gsap.to(card, {
-                    scale: 1,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
-        });
-
-        // Logo hover animation
-        document.querySelectorAll('.logo img').forEach(logo => {
-            logo.addEventListener('mouseenter', () => {
-                gsap.to(logo, {
-                    scale: 1.05,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
-
-            logo.addEventListener('mouseleave', () => {
-                gsap.to(logo, {
-                    scale: 1,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
         });
     </script>
 </body>
