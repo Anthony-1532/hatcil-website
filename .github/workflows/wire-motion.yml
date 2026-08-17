@@ -1,0 +1,41 @@
+name: Wire HATCIL motion layer
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  wire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wire motion.js and remove temporary workflow
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>'
+          script = '    <script src="motion.js" defer></script>'
+          if 'src="motion.js"' not in s:
+              if marker not in s:
+                  raise SystemExit('Could not find the GSAP ScrollTrigger script marker')
+              s = s.replace(marker, marker + '\n' + script, 1)
+              p.write_text(s, encoding='utf-8')
+          else:
+              print('motion.js already wired')
+          PY
+          rm -f .github/workflows/wire-motion.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/wire-motion.yml
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+            exit 0
+          fi
+          git commit -m "feat: wire motion layer into HATCIL"
+          git push
