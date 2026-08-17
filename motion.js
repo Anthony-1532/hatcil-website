@@ -1,51 +1,45 @@
 /**
- * HATCIL — Motion Layer
+ * HATCIL — Motion UI
  * Corporate first, motion second.
- *
- * Mirrors the spring/crossfade philosophy of the supplied motion reference
- * while keeping HATCIL as a static HTML/CSS/JS project.
+ * Inspired by the supplied spring/crossfade reference.
  */
 (function () {
   "use strict";
 
   const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const prefersReduced = () => reduceMotionQuery.matches;
-
-  if (!window.gsap) return;
-  if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
-
+  const reduced = () => reduceMotionQuery.matches;
   const SPRING = "back.out(1.15)";
-  const SPRING_SOFT = "power3.out";
-  const CROSSFADE_DURATION = 0.35;
+  const SOFT = "power3.out";
 
-  function whenReady(fn) {
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", fn);
-    } else {
-      fn();
-    }
+  // Load the visual refresh after the existing inline stylesheet so its
+  // deliberate design overrides win without touching imagery or the logo.
+  const refresh = document.createElement("link");
+  refresh.rel = "stylesheet";
+  refresh.href = "design-refresh.css";
+  document.head.appendChild(refresh);
+
+  function ready(fn) {
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
+    else fn();
   }
 
-  whenReady(() => {
-    if (prefersReduced()) return;
+  ready(() => {
+    if (!window.gsap) return;
+    if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+    if (reduced()) return;
+
     initNav();
     initHero();
-    initStats();
-    initServiceCards();
-    initValueCards();
-    initAboutReveal();
-    initTeamCards();
-    initPartnerCards();
-    initContactForm();
+    initReveals();
+    initCounters();
+    initCards();
+    initContact();
   });
 
   function initNav() {
     const nav = document.querySelector("nav");
-    const links = document.querySelectorAll(".nav-links a");
     if (!nav) return;
-
     let lastY = window.scrollY;
-    gsap.set(nav, { y: 0 });
 
     if (window.ScrollTrigger) {
       ScrollTrigger.create({
@@ -53,171 +47,151 @@
         end: 99999,
         onUpdate: () => {
           const y = window.scrollY;
-          const goingDown = y > lastY && y > 80;
-          gsap.to(nav, {
-            y: goingDown ? -90 : 0,
-            duration: 0.4,
-            ease: SPRING_SOFT,
-            overwrite: "auto",
-          });
           nav.classList.toggle("nav-scrolled", y > 24);
+          gsap.to(nav, {
+            y: y > 90 && y > lastY ? -90 : 0,
+            duration: .42,
+            ease: SOFT,
+            overwrite: "auto"
+          });
           lastY = y;
-        },
+        }
       });
     }
 
-    links.forEach((link) => {
+    document.querySelectorAll(".nav-links a").forEach((link) => {
       const underline = document.createElement("span");
       underline.className = "nav-underline";
       link.appendChild(underline);
-      const tl = gsap.timeline({ paused: true });
-      tl.fromTo(underline, { scaleX: 0 }, {
-        scaleX: 1,
-        duration: 0.28,
-        ease: SPRING,
-        transformOrigin: "left",
-      });
-      link.addEventListener("mouseenter", () => tl.play());
-      link.addEventListener("mouseleave", () => tl.reverse());
-      link.addEventListener("focus", () => tl.play());
-      link.addEventListener("blur", () => tl.reverse());
+      link.addEventListener("mouseenter", () => gsap.to(underline, { scaleX: 1, duration: .32, ease: SPRING }));
+      link.addEventListener("mouseleave", () => gsap.to(underline, { scaleX: 0, duration: .22, ease: SOFT }));
+      link.addEventListener("focus", () => gsap.to(underline, { scaleX: 1, duration: .32, ease: SPRING }));
+      link.addEventListener("blur", () => gsap.to(underline, { scaleX: 0, duration: .22, ease: SOFT }));
     });
   }
 
   function initHero() {
-    const heroText = document.querySelector(".hero-text");
-    if (!heroText) return;
-    const heading = heroText.querySelector("h1, h2");
-    const sub = heroText.querySelector("p");
-    const ctas = heroText.querySelectorAll(".btn");
+    const hero = document.querySelector(".hero");
+    const text = document.querySelector(".hero-text");
+    if (!hero || !text) return;
+
+    const heading = text.querySelector("h1, h2");
+    const tagline = text.querySelector(".tagline");
+    const copy = text.querySelector("p");
+    const buttons = text.querySelectorAll(".btn");
     const stats = document.querySelectorAll(".hero-stats .stat");
-    const tl = gsap.timeline({ defaults: { ease: SPRING_SOFT, duration: 0.7 } });
-    if (heading) tl.from(heading, { y: 24, opacity: 0 }, 0);
-    if (sub) tl.from(sub, { y: 18, opacity: 0 }, 0.1);
-    if (ctas.length) tl.from(ctas, { y: 14, opacity: 0, stagger: 0.08, ease: SPRING }, 0.22);
-    if (stats.length) tl.from(stats, { y: 16, opacity: 0, stagger: 0.06, ease: SPRING }, 0.32);
+    const logo = document.querySelector(".hero-logo img");
+
+    const tl = gsap.timeline({ defaults: { ease: SOFT } });
+    if (tagline) tl.from(tagline, { y: 18, opacity: 0, duration: .5 }, 0);
+    if (heading) tl.from(heading, { y: 34, opacity: 0, duration: .72, ease: SPRING }, .06);
+    if (copy) tl.from(copy, { y: 18, opacity: 0, duration: .55 }, .18);
+    if (buttons.length) tl.from(buttons, { y: 16, opacity: 0, stagger: .08, duration: .5, ease: SPRING }, .28);
+    if (stats.length) tl.from(stats, { y: 16, opacity: 0, stagger: .07, duration: .48, ease: SPRING }, .38);
+    if (logo) tl.from(logo, { scale: .92, opacity: 0, duration: .75, ease: SPRING }, .12);
+
+    if (logo && window.matchMedia("(min-width: 769px)").matches) {
+      gsap.to(logo, { y: -7, duration: 3.2, repeat: -1, yoyo: true, ease: "sine.inOut" });
+    }
   }
 
-  function reveal(selector, options = {}) {
-    const elements = document.querySelectorAll(selector);
-    if (!elements.length || !window.ScrollTrigger) return;
+  function reveal(elements, opts = {}) {
+    if (!window.ScrollTrigger || !elements.length) return;
     gsap.from(elements, {
-      scrollTrigger: { trigger: elements[0], start: options.start || "top 88%", once: true },
-      y: options.y ?? 24,
-      x: options.x ?? 0,
+      scrollTrigger: { trigger: elements[0], start: opts.start || "top 86%", once: true },
+      x: opts.x || 0,
+      y: opts.y ?? 26,
       opacity: 0,
-      duration: options.duration || 0.55,
-      ease: SPRING_SOFT,
-      stagger: options.stagger || 0.08,
+      duration: opts.duration || .62,
+      stagger: opts.stagger || .08,
+      ease: SOFT
     });
   }
 
-  function initStats() {
-    document.querySelectorAll(".stat").forEach((stat) => {
-      if (!window.ScrollTrigger) return;
+  function initReveals() {
+    reveal(document.querySelectorAll(".section-header"), { y: 24 });
+    reveal(document.querySelectorAll(".service-card"), { y: 30, stagger: .1 });
+    reveal(document.querySelectorAll(".value-card"), { y: 22, stagger: .08 });
+    reveal(document.querySelectorAll(".team-card"), { y: 28, stagger: .09 });
+    reveal(document.querySelectorAll(".partner-card"), { y: 20, stagger: .06 });
+    reveal(document.querySelectorAll(".contact-info"), { x: -28, y: 0 });
+    reveal(document.querySelectorAll(".contact-form"), { x: 28, y: 0 });
+  }
+
+  function initCounters() {
+    if (!window.ScrollTrigger) return;
+    document.querySelectorAll(".stat-number").forEach((el) => {
+      const match = el.textContent.trim().match(/(\d+)/);
+      if (!match) return;
+      const target = Number(match[1]);
+      const suffix = el.textContent.trim().replace(match[1], "");
+      const state = { value: 0 };
       ScrollTrigger.create({
-        trigger: stat,
-        start: "top 85%",
+        trigger: el,
+        start: "top 88%",
         once: true,
-        onEnter: () => gsap.fromTo(stat, { scale: 0.94, opacity: 0.6 }, {
-          scale: 1, opacity: 1, duration: 0.5, ease: SPRING,
-        }),
+        onEnter: () => gsap.to(state, {
+          value: target,
+          duration: 1.15,
+          ease: "power2.out",
+          onUpdate: () => { el.textContent = Math.round(state.value) + suffix; }
+        })
       });
     });
   }
 
-  function initServiceCards() {
-    const cards = document.querySelectorAll(".service-card");
-    if (!cards.length) return;
-    reveal(".service-card", { y: 28, stagger: 0.1 });
-    cards.forEach((card) => {
-      let accent = card.querySelector(".card-accent-bar");
-      if (!accent) {
-        accent = document.createElement("span");
-        accent.className = "card-accent-bar";
-        card.prepend(accent);
-      }
+  function initCards() {
+    document.querySelectorAll(".service-card").forEach((card) => {
+      const accent = card.querySelector(".card-accent-bar");
       const enter = () => {
-        gsap.to(card, { y: -6, boxShadow: "0 18px 36px rgba(10,25,49,.14)", duration: 0.35, ease: SPRING });
-        gsap.to(accent, { scaleX: 1, duration: 0.3, ease: SPRING });
+        gsap.to(card, { y: -7, boxShadow: "0 22px 50px rgba(10,25,49,.13)", duration: .38, ease: SPRING });
+        if (accent) gsap.to(accent, { scaleX: 1, duration: .35, ease: SPRING });
       };
       const leave = () => {
-        gsap.to(card, { y: 0, boxShadow: "0 1px 2px rgba(10,25,49,.06)", duration: 0.35, ease: SPRING_SOFT });
-        gsap.to(accent, { scaleX: 0, duration: 0.25, ease: SPRING_SOFT });
+        gsap.to(card, { y: 0, boxShadow: "0 1px 2px rgba(10,25,49,.04)", duration: .35, ease: SOFT });
+        if (accent) gsap.to(accent, { scaleX: 0, duration: .25, ease: SOFT });
       };
       card.addEventListener("mouseenter", enter);
       card.addEventListener("mouseleave", leave);
       card.addEventListener("focusin", enter);
       card.addEventListener("focusout", leave);
     });
-  }
 
-  function initValueCards() { reveal(".value-card", { y: 20 }); }
-  function initAboutReveal() { reveal(".about-content", { x: -24, y: 0, start: "top 82%" }); }
-
-  function initTeamCards() {
-    const cards = document.querySelectorAll(".team-card");
-    if (!cards.length) return;
-    reveal(".team-card", { y: 24, stagger: 0.1 });
-    cards.forEach((card) => {
-      const image = card.querySelector(".team-image");
+    document.querySelectorAll(".team-card").forEach((card) => {
+      const image = card.querySelector(".team-image img");
       if (!image) return;
-      card.addEventListener("mouseenter", () => gsap.to(image, { scale: 1.04, duration: 0.4, ease: SPRING }));
-      card.addEventListener("mouseleave", () => gsap.to(image, { scale: 1, duration: 0.4, ease: SPRING_SOFT }));
+      card.addEventListener("mouseenter", () => gsap.to(image, { scale: 1.035, duration: .55, ease: SOFT }));
+      card.addEventListener("mouseleave", () => gsap.to(image, { scale: 1, duration: .55, ease: SOFT }));
+    });
+
+    document.querySelectorAll(".partner-card").forEach((card) => {
+      card.addEventListener("mouseenter", () => gsap.to(card, { y: -4, duration: .32, ease: SPRING }));
+      card.addEventListener("mouseleave", () => gsap.to(card, { y: 0, duration: .3, ease: SOFT }));
+    });
+
+    document.querySelectorAll(".btn").forEach((button) => {
+      button.addEventListener("pointerdown", () => gsap.to(button, { scale: .97, duration: .12, ease: SOFT }));
+      button.addEventListener("pointerup", () => gsap.to(button, { scale: 1, duration: .35, ease: SPRING }));
+      button.addEventListener("pointerleave", () => gsap.to(button, { scale: 1, duration: .25, ease: SOFT }));
     });
   }
 
-  function initPartnerCards() {
-    const cards = document.querySelectorAll(".partner-card");
-    if (!cards.length) return;
-    reveal(".partner-card", { y: 16, stagger: 0.05, start: "top 90%" });
-    cards.forEach((card) => {
-      card.addEventListener("mouseenter", () => gsap.to(card, { y: -4, duration: 0.3, ease: SPRING }));
-      card.addEventListener("mouseleave", () => gsap.to(card, { y: 0, duration: 0.3, ease: SPRING_SOFT }));
-    });
-  }
-
-  function initContactForm() {
+  function initContact() {
     const form = document.getElementById("contactForm");
     if (!form) return;
-    form.querySelectorAll(".form-group input, .form-group textarea").forEach((field) => {
-      const group = field.closest(".form-group");
-      if (!group) return;
-      field.addEventListener("focus", () => gsap.to(group, { y: -2, duration: 0.25, ease: SPRING }));
-      field.addEventListener("blur", () => gsap.to(group, { y: 0, duration: 0.25, ease: SPRING_SOFT }));
+
+    form.querySelectorAll("input, textarea").forEach((field) => {
+      field.addEventListener("focus", () => gsap.to(field, { y: -1, duration: .2, ease: SPRING }));
+      field.addEventListener("blur", () => gsap.to(field, { y: 0, duration: .2, ease: SOFT }));
     });
 
-    const submitBtn = form.querySelector('button[type="submit"]');
-    if (!submitBtn) return;
-    const originalLabel = submitBtn.textContent;
-    submitBtn.innerHTML = "";
-    submitBtn.style.position = "relative";
-
-    const idle = document.createElement("span");
-    idle.textContent = originalLabel;
-    idle.className = "btn-state btn-state-idle";
-    const pending = document.createElement("span");
-    pending.textContent = "Sending…";
-    pending.className = "btn-state btn-state-pending";
-    const success = document.createElement("span");
-    success.textContent = "Message Sent";
-    success.className = "btn-state btn-state-success";
-    submitBtn.append(idle, pending, success);
-    gsap.set(pending, { opacity: 0, position: "absolute", inset: 0 });
-    gsap.set(success, { opacity: 0, position: "absolute", inset: 0 });
-
-    const crossfade = (show, hide) => {
-      hide.forEach((el) => gsap.to(el, { opacity: 0, duration: CROSSFADE_DURATION, ease: SPRING_SOFT }));
-      gsap.to(show, { opacity: 1, duration: CROSSFADE_DURATION, ease: SPRING_SOFT });
-    };
-    form.addEventListener("submit", () => {
-      crossfade(pending, [idle, success]);
-      gsap.to(submitBtn, { scale: 0.98, duration: 0.15, ease: SPRING_SOFT });
-      window.setTimeout(() => {
-        crossfade(success, [idle, pending]);
-        gsap.to(submitBtn, { scale: 1, duration: 0.3, ease: SPRING });
-      }, 900);
-      window.setTimeout(() => crossfade(idle, [pending, success]), 3200);
-    });
+    const button = form.querySelector('button[type="submit"]');
+    if (!button) return;
+    const original = button.textContent.trim();
+    const label = document.createElement("span");
+    label.textContent = original;
+    label.className = "btn-state btn-state-idle";
+    button.textContent = "";
+    button.appendChild(label);
   }
 })();
