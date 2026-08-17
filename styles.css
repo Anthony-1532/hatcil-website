@@ -1,4 +1,4 @@
-/* styles.css - extracted from index.html; contains responsive styles, mobile nav overlay, accessibility helpers, and hero overlay utility */
+/* styles.css - responsive styles and mobile layout improvements */
 :root{
   --primary-color:#0A1931;
   --accent-color:#00A8E8;
@@ -6,91 +6,183 @@
   --text-light:#F5F5F5;
   --text-dark:#1F2937;
   --gradient:linear-gradient(135deg,#0A1931 0%,#001f3f 100%);
-  --overlay-opacity:0.25; /* change to 0 to hide overlay */
+  --overlay-opacity:0.25;
 }
 
-/* Accessibility helpers */
-.skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-.skip-link:focus{position:fixed;left:1rem;top:1rem;width:auto;height:auto;background:#fff;padding:0.5rem 1rem;border-radius:6px;box-shadow:0 6px 20px rgba(0,0,0,0.15);z-index:9999}
-
-html,body{height:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden;color:#333;line-height:1.6;margin:0;padding:0;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{width:100%;min-height:100%;margin:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;overflow-x:hidden;color:#333;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 img{max-width:100%;height:auto;display:block}
-
+button,input,textarea{font:inherit}
 :focus{outline:none}
 :focus-visible{outline:3px solid var(--accent-color);outline-offset:3px}
 
 /* Navigation */
-nav[role="navigation"]{background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.08)}
-.nav-container{max-width:1200px;margin:0 auto;padding:0.5rem 2rem;display:flex;justify-content:space-between;align-items:center}
-.logo img{height:50px;width:auto}
-.nav-links{display:flex;list-style:none;gap:2rem;margin:0;padding:0}
-.nav-links a{text-decoration:none;color:var(--text-dark);font-weight:500;transition:color .2s;padding:0.5rem 0.25rem}
+nav[role="navigation"],nav{background:rgba(255,255,255,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);position:fixed;width:100%;top:0;left:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,.08)}
+.nav-container{width:100%;max-width:1200px;margin:0 auto;padding:.5rem 2rem;display:flex;justify-content:space-between;align-items:center;min-height:64px}
+.logo{flex:0 0 auto;min-width:0}
+.logo img{height:50px;width:auto;max-width:180px;object-fit:contain}
+.nav-links{display:flex;align-items:center;list-style:none;gap:2rem;margin:0;padding:0}
+.nav-links a{text-decoration:none;color:var(--text-dark);font-weight:500;transition:color .2s;padding:.5rem .25rem;white-space:nowrap}
 .nav-links a:hover,.nav-links a.active{color:var(--accent-color)}
-.mobile-menu{display:none;flex-direction:column;cursor:pointer;gap:4px;padding:6px;background:transparent;border:0}
+.mobile-menu{display:none;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;gap:4px;padding:8px;background:transparent;border:0;flex:0 0 auto}
 .mobile-menu span{width:25px;height:3px;background:var(--primary-color);border-radius:2px;display:block}
 
-/* Full-screen mobile nav overlay */
-.nav-overlay{display:none}
+/* Full-screen mobile navigation */
+.nav-overlay{display:none;position:fixed;inset:0;background:linear-gradient(180deg,rgba(4,20,40,.98),rgba(4,20,40,.96));color:#fff;z-index:1500;align-items:center;justify-content:center;padding:2rem}
 .nav-overlay.active{display:flex}
-.nav-overlay{position:fixed;inset:0;background:linear-gradient(180deg,rgba(4,20,40,0.98),rgba(4,20,40,0.96));color:white;z-index:1500;align-items:center;justify-content:center;padding:2rem}
 .nav-overlay .nav-list{list-style:none;padding:0;margin:0;text-align:center}
 .nav-overlay .nav-list li{margin:1rem 0}
-.nav-overlay .nav-list a{font-size:1.5rem;color:white;text-decoration:none;display:block;padding:0.75rem 1rem}
-.nav-overlay .close-overlay{position:absolute;top:1rem;right:1rem;background:transparent;border:0;color:white;font-size:1.25rem}
+.nav-overlay .nav-list a{font-size:1.5rem;color:#fff;text-decoration:none;display:block;padding:.75rem 1rem}
+.nav-overlay .close-overlay{position:absolute;top:1rem;right:1rem;background:transparent;border:0;color:#fff;font-size:1.5rem;padding:.5rem}
 
-/* Hero and responsive image layer */
-.hero{margin-top:80px;min-height:55vh;position:relative;display:flex;align-items:center;overflow:hidden}
+/* Hero */
+.hero{margin-top:80px;min-height:70vh;position:relative;display:flex;align-items:center;overflow:hidden;background-position:center;background-size:cover}
 .hero-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
-.hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 4rem;display:flex;align-items:center;min-height:320px}
-.hero-text{max-width:800px}
-.hero-text h1{font-size:3.2rem;color:white;margin:0 0 .5rem;line-height:1.05;font-weight:700}
-.hero-text .tagline{font-size:1.4rem;color:var(--secondary-color);margin-bottom:1rem}
-.hero-text p{color:rgba(255,255,255,0.95);font-size:1.05rem;margin-bottom:1.25rem}
-
-/* Hero decorative overlay utility (progressive) */
+.hero-content{position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:2rem 4rem;display:flex;align-items:center;min-height:400px;gap:2rem}
+.hero-text{max-width:800px;min-width:0}
+.hero-text h1{font-size:3.2rem;color:#fff;margin:0 0 .5rem;line-height:1.08;font-weight:700;overflow-wrap:anywhere}
+.hero-text .tagline{font-size:1.4rem;color:var(--secondary-color);margin:0 0 1rem}
+.hero-text p{color:rgba(255,255,255,.95);font-size:1.05rem;margin:0 0 1.25rem;line-height:1.6}
+.hero-logo{width:100%;height:320px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-logo img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 10px 30px rgba(0,0,0,.3))}
 .hero::before{content:'';position:absolute;inset:0;background:repeating-radial-gradient(circle at 50% 50%,rgba(255,255,255,var(--overlay-opacity)) 0 2px,transparent 3px 6px);animation:float 20s linear infinite;z-index:1;pointer-events:none}
-/* Utility class that can be toggled to hide overlay on very small devices */
 .hero--overlay-hidden::before{opacity:0;visibility:hidden}
-
 @keyframes float{0%{transform:translate(0,0)}100%{transform:translate(-10%,10%)}}
 
-/* Content containers */
-.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+/* Buttons */
+.btn{max-width:100%;padding:1rem 2rem;text-decoration:none;border-radius:50px;font-weight:600;cursor:pointer;border:none;font-size:1rem;display:inline-block;text-align:center}
+.btn-primary{background:var(--secondary-color);color:var(--primary-color)}
+.btn-secondary{background:transparent;color:#fff;border:2px solid #fff}
+
+/* Content */
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 1.5rem}
+section{scroll-margin-top:80px}
 .section-header{text-align:center;margin-bottom:3rem}
-.section-header h2{font-size:2.2rem;color:var(--primary-color);margin-bottom:.75rem}
+.section-header h2{font-size:2.2rem;color:var(--primary-color);margin:0 0 .75rem;overflow-wrap:anywhere}
 .section-header p{font-size:1.05rem;color:#666;max-width:720px;margin:0 auto}
 
-/* Cards, team, services, etc. keep minimal styles for brevity */
-.service-card, .team-card, .partner-card{background:white;border-radius:12px;padding:1.25rem;box-shadow:0 8px 24px rgba(10,10,10,0.06)}
-.team-image{width:100%;height:300px;overflow:hidden}
-.team-image img{width:100%;height:100%;object-fit:cover}
+/* Cards */
+.service-card,.team-card,.partner-card{background:#fff;border-radius:12px;padding:1.25rem;box-shadow:0 8px 24px rgba(10,10,10,.06);min-width:0;overflow:hidden}
+.service-card{padding:2.5rem;border-radius:20px}
+.service-icon{width:60px;height:60px;background:var(--gradient);border-radius:15px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:1.5rem;color:#fff}
+.service-card h3,.team-info h3{color:var(--primary-color);overflow-wrap:anywhere}
+.service-features{list-style:none;margin-top:1.5rem;padding:0}
+.service-features li{padding:.5rem 0;color:#555;position:relative;padding-left:1.5rem;overflow-wrap:anywhere}
+.service-features li::before{content:'✓';position:absolute;left:0;color:var(--accent-color);font-weight:700}
+.team-image{width:100%;height:300px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.team-image img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.team-info{padding:2rem;min-width:0}
+.partner-logo{width:80px;height:80px;border-radius:50%;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--primary-color)}
 
-/* Focus states for interactive elements */
+/* About / values */
+.about-content{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.values-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;margin-top:2rem}
+.value-card{padding:1.5rem;background:#fff;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.08);border-left:4px solid var(--accent-color);min-width:0}
+
+/* Contact */
+.contact-content{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.contact-item{display:flex;align-items:center;margin-bottom:1.5rem;gap:1rem;min-width:0}
+.contact-item>*{min-width:0}
+.contact-icon{width:40px;height:40px;min-width:40px;background:var(--accent-color);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.contact-form{background:rgba(255,255,255,.06);padding:2rem;border-radius:20px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);margin:0;width:100%;min-width:0}
+.form-group{margin-bottom:1.5rem}
+.form-group label{display:block;margin-bottom:.5rem}
+.form-group input,.form-group textarea{width:100%;max-width:100%;padding:1rem;border:none;border-radius:10px;font-size:1rem;display:block}
+.form-group textarea{resize:vertical;min-height:120px}
+
+footer{background:#051423;color:#fff;text-align:center;padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.footer-logo{text-align:center}.footer-logo img{height:60px;width:auto;margin-bottom:1.5rem}
+
+/* Accessibility */
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--accent-color);outline-offset:3px}
-
-/* Responsive and mobile improvements */
-@media (max-width:768px){
-  .nav-container{padding:.5rem 1rem}
-  .nav-links{display:none}
-  .mobile-menu{display:flex}
-  .hero-content{padding:0 1rem;flex-direction:column;align-items:flex-start;min-height:45vh}
-  .hero-text h1{font-size:2rem}
-  .hero-media{object-position:center top}
-  .hero::before{display:block}
-  /* hide the overlay on very small screens by default; utility keeps control */
-  .hero{--overlay-opacity:0.12}
-}
-
-/* Very small phones: progressively hide the overlay to improve clarity */
-@media (max-width:420px){
-  .hero{--overlay-opacity:0}
-}
-
-/* Small-screen nav overlay preference: show overlay instead of inline nav links */
-@media (max-width:768px){
-  .nav-overlay{display:flex}
-}
-
-/* Simple helper to visually hide elements (but keep accessible) */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Tablet */
+@media (max-width:1024px){
+  .nav-container{padding:.5rem 1.25rem}
+  .nav-links{gap:1rem}
+  .hero-content{padding:2rem 2rem;gap:1.5rem}
+  .hero-text h1{font-size:2.7rem}
+  .about-content,.contact-content{gap:2rem}
+}
+
+/* Phones */
+@media (max-width:768px){
+  body{width:100%;overflow-x:hidden}
+  nav{height:auto}
+  .nav-container{padding:.5rem .875rem;min-height:60px}
+  .logo img{height:40px;max-width:150px}
+  .nav-links{display:none!important}
+  .mobile-menu{display:flex}
+
+  .hero{margin-top:60px;min-height:auto;min-height:calc(100svh - 60px);background-position:center top}
+  .hero-content{width:100%;padding:3rem 1rem 2.5rem;display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:1.5rem;min-height:calc(100svh - 60px)}
+  .hero-text{width:100%;max-width:none;text-align:left}
+  .hero-text h1{font-size:clamp(2rem,9vw,2.7rem);line-height:1.08;margin-bottom:.75rem}
+  .hero-text .tagline{font-size:1.05rem;line-height:1.4}
+  .hero-text p{font-size:1rem;line-height:1.55}
+  .hero-logo{height:160px;max-height:28vw;min-height:110px}
+  .hero-logo img{max-height:100%;max-width:75%}
+  .hero::before{display:none}
+
+  .container{padding-left:1rem;padding-right:1rem}
+  section{scroll-margin-top:68px}
+  .section-header{margin-bottom:2rem;padding:0 .25rem}
+  .section-header h2{font-size:clamp(1.75rem,7vw,2.2rem);line-height:1.15}
+  .section-header p{font-size:1rem;line-height:1.55}
+
+  .about-content,.contact-content{grid-template-columns:1fr;gap:2rem;text-align:left}
+  .values-grid{grid-template-columns:1fr;gap:1rem}
+  .service-card{padding:1.35rem;border-radius:16px}
+  .service-icon{width:52px;height:52px;margin-bottom:1rem}
+  .team-image{height:220px}
+  .team-info{padding:1.25rem}
+  .partner-card{padding:1.25rem}
+
+  .hero .flex{width:100%;gap:.75rem!important}
+  .hero .flex .btn{flex:1 1 100%;width:100%;min-width:0}
+  .btn{padding:.8rem 1rem;font-size:.95rem}
+
+  .contact-form{padding:1rem;border-radius:16px}
+  .contact-item{align-items:flex-start}
+  .contact-item a,.contact-item span{overflow-wrap:anywhere;word-break:break-word}
+
+  footer{padding:2rem 1rem}
+  .footer-logo img{height:50px}
+
+  /* Prevent long labels/headings from creating horizontal overflow */
+  h1,h2,h3,h4,p,a,li,span{overflow-wrap:anywhere}
+}
+
+/* Small phones */
+@media (max-width:420px){
+  .nav-container{padding:.4rem .75rem}
+  .logo img{height:36px;max-width:130px}
+  .mobile-menu{padding:7px}
+  .mobile-menu span{width:23px;height:2.5px}
+  .hero-content{padding:2.25rem .875rem 2rem}
+  .hero-text h1{font-size:clamp(1.8rem,9.5vw,2.3rem)}
+  .hero-text .tagline{font-size:.98rem}
+  .hero-text p{font-size:.95rem}
+  .hero-logo{height:120px;min-height:90px}
+  .hero-logo img{max-width:65%}
+  .service-card{padding:1.1rem}
+  .section-header h2{font-size:1.7rem}
+  .contact-form{padding:.875rem}
+  .form-group input,.form-group textarea{padding:.875rem;font-size:.95rem}
+}
+
+/* Extra-small devices */
+@media (max-width:360px){
+  .hero-content{padding-left:.75rem;padding-right:.75rem}
+  .hero-text h1{font-size:1.75rem}
+  .btn{font-size:.9rem;padding:.75rem .85rem}
+  .container{padding-left:.75rem;padding-right:.75rem}
+}
+
+/* Respect reduced-motion preferences on mobile and desktop */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
