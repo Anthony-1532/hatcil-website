@@ -186,3 +186,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+/* Final mobile cascade: this file is loaded after the inline base CSS. */
+@media (max-width: 768px) {
+  .nav-links { display: none !important; }
+  .nav-links.active { display: flex !important; }
+  .mobile-menu { display: flex !important; }
+  .hero-content { flex-direction: column !important; align-items: stretch !important; width: 100% !important; }
+  .hero-text { width: 100% !important; max-width: none !important; }
+  .hero-text h1 { font-size: clamp(2rem, 9vw, 2.7rem) !important; line-height: 1.08 !important; }
+  .about-content, .contact-content { grid-template-columns: 1fr !important; }
+  .values-grid { grid-template-columns: 1fr !important; }
+  .hero .flex .btn { width: 100% !important; flex: 1 1 100% !important; }
+  .contact-form { width: 100% !important; box-sizing: border-box !important; }
+  .form-group input, .form-group textarea { width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; }
+}
