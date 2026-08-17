@@ -51,6 +51,7 @@ The project is intentionally lightweight and does **not** use React, Next.js, Vu
 
 - GSAP 3.12.2
 - GSAP ScrollTrigger
+- `motion.js` — restrained motion layer inspired by spring/crossfade interaction patterns
 
 ### Typography
 
@@ -69,6 +70,7 @@ The repository contains a `package.json` and Bun lockfile for the project's fron
 hatcil-website/
 ├── index.html          # Main website document and page structure
 ├── styles.css          # External styling and responsive rules
+├── motion.js           # Progressive motion/interaction layer
 ├── assets/             # Local images and other static assets, when present
 ├── package.json        # Development dependencies/scripts
 ├── bun.lock            # Bun dependency lockfile
@@ -156,19 +158,23 @@ When adding a new navigation item:
 
 ---
 
-## 🎬 Animation Architecture
+## 🎬 Motion Architecture
 
-GSAP and ScrollTrigger are used for visual animation and scroll-based effects.
+HATCIL uses GSAP and ScrollTrigger for a restrained interaction layer. The approach is inspired by spring/crossfade UI patterns rather than continuous decorative animation.
 
-Animations should remain progressive enhancements rather than becoming prerequisites for the page's basic usability.
+`motion.js` provides:
 
-When adding animations:
+- Spring-like navbar and card interactions
+- Staggered hero entrance
+- Scroll-triggered section/card reveals
+- Subtle statistic emphasis
+- Team image hover motion
+- Partner card transitions
+- Form focus movement
+- Contact submit-state crossfades
+- `prefers-reduced-motion` support
 
-- Avoid animating layout properties unnecessarily.
-- Prefer transforms and opacity for smoother rendering.
-- Avoid excessive animation on mobile devices.
-- Respect `prefers-reduced-motion` where practical.
-- Ensure content remains readable if JavaScript or animation fails.
+The motion layer is deliberately progressive: the page remains usable when JavaScript is unavailable or reduced motion is requested.
 
 ---
 
